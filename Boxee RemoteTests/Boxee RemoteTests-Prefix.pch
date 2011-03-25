@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Boxee RemoteTests' target in the 'Boxee RemoteTests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif
