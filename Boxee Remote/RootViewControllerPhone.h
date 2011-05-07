@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BoxeeHTTPInterface.h"
-#import "SettingsViewController.h"
 #import "SettingsViewControllerPhone.h"
-#import "TVShowsTableView.h"
+#import "DetailViewPhone.h"
 
 @class DetailViewController;
 
-@interface RootViewController : UITableViewController <UINavigationControllerDelegate> {
+@interface RootViewControllerPhone : UITableViewController <UINavigationControllerDelegate> {
     BoxeeHTTPInterface *m_boxee;
     NSArray *mediaShares;
     NSArray *dataSource;
@@ -27,16 +26,8 @@
 }
 
 -(id)initWithPath:(NSString *)path title:(NSString*)title;
--(id)initWithTVShow:(NSString *)show;
--(id)initWithMovies;
--(id)initWithMusic;
--(id)initWithArtists;
--(id)initWithAlbums;
--(id)initWithAlbum:(NSString *)album Name:(NSString *)name;
--(id)initWithArtist:(NSString *)artist Name:(NSString *)name;
--(id)initWithFiles;
 
-extern NSString * const hideMediaListPopupNotification;
+//extern NSString * const hideMediaListPopupNotification;
 
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
 @property (nonatomic) BOOL isRootDirectory;
