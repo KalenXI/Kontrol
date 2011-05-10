@@ -108,7 +108,7 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
 {
     // Return YES for supported orientations
 
-    return NO;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source

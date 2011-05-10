@@ -57,9 +57,9 @@ dispatch_queue_t myQueue;
         viewController.isLibraryDirectory = NO;
         viewController.libraryType = 3;
     } else if ([viewController.title isEqualToString:@"TV Shows"]) {
-        viewController.isRootDirectory = NO;
-        viewController.isLibraryDirectory = YES;
-        viewController.libraryType = 0;
+        //viewController.isRootDirectory = NO;
+        //viewController.isLibraryDirectory = YES;
+        //viewController.libraryType = 0;
     } else if ([viewController.title isEqualToString:@"Albums"]) {
         viewController.isRootDirectory = NO;
         viewController.isLibraryDirectory = YES;
@@ -306,7 +306,7 @@ dispatch_queue_t myQueue;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return NO;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -452,77 +452,6 @@ dispatch_queue_t myQueue;
             }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
-        } else {
-            //Return cells for sub library directory.
-            NSString *cellIdentifier;
-            //NSLog(@"libraryType: %i",libraryType);
-            //NSLog(@"Returning cells for sub library directory.");            
-            if ([self.title isEqualToString:@"TV Shows"]) {
-                cellIdentifier = @"TVShowCell";
-            } else if (libraryType == 1) {
-                cellIdentifier = @"MovieCell";
-            } else if (libraryType == 2) {
-                cellIdentifier = @"MusicCell";
-            } else if (libraryType == 4) {
-                cellIdentifier = @"EpisodeCell";
-            } else if (libraryType == 5) {
-                cellIdentifier = @"AlbumCell";
-            } else if (libraryType == 6) {
-                cellIdentifier = @"ArtistCell";
-            } else if (libraryType == 7) {
-                cellIdentifier = @"AlbumSongCell";
-            } else if (libraryType == 8) {
-                cellIdentifier = @"ArtistSongCell";
-            } else {
-                cellIdentifier = @"Cell";
-            }
-            
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            if (cell == nil) {
-                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
-            }
-            
-            if ([self.title isEqualToString:@"TV Shows"]) {
-                //NSLog(@"Data source: %@",dataSource);
-                //Is TV Show
-                cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                //cell.detailTextLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strPath"];
-                //NSLog(@"Set detailed label to: %@",cell.detailTextLabel.text);
-            } else if (libraryType == 1) {
-                cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
-                cell.detailTextLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strPath"];
-                cell.detailTextLabel.lineBreakMode = UILineBreakModeHeadTruncation;
-            } else if (libraryType == 4) {
-                NSDictionary *curObject = [dataSource objectAtIndex:indexPath.row];
-                cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@",[curObject valueForKey:@"iSeason"],[curObject valueForKey:@"iEpisode"],[curObject valueForKey:@"strTitle"]];
-                cell.detailTextLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strPath"];
-                cell.detailTextLabel.lineBreakMode = UILineBreakModeHeadTruncation;
-            } else if ([self.title isEqualToString:@"Music"]) {
-                //NSLog(@"Cell is music.");
-                cell.textLabel.text = [dataSource objectAtIndex:indexPath.row];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            } else if ([self.title isEqualToString:@"Albums"]) {
-                cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            } else if ([self.title isEqualToString:@"Artists"]) {
-                cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strName"];
-                
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            } else if (libraryType == 7) {
-                cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
-                //NSLog(@"AlbumSongCell = %@",[dataSource objectAtIndex:indexPath.row]);
-                cell.detailTextLabel.text = [m_boxee getArtistWithID:[[dataSource objectAtIndex:indexPath.row] valueForKey:@"idArtist"]];
-            } else if (libraryType == 8) {
-                cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
-                cell.detailTextLabel.text = [m_boxee getAlbumWithID:[[dataSource objectAtIndex:indexPath.row] valueForKey:@"idAlbum"]];
-                //NSLog(@"ArtistSongCell = %@",[dataSource objectAtIndex:indexPath.row]);
-            } else {
-                //NSLog(@"Unidentified cell source.");
-                cell.textLabel.text = @"Unidentified cell source.";
-            }
-            
-            return cell;
         }
     } else if ((numOfShares == 0) && (isLibraryDirectory == YES)) {
         static NSString *CellIdentifier = @"Cell";
@@ -544,243 +473,56 @@ dispatch_queue_t myQueue;
         cell.textLabel.text = @"Select a Boxee server.";
         return cell;
     }
+	
+	//Return instruction cell if server not connected.
+	static NSString *CellIdentifier = @"Cell";
+	//NSLog(@"Number of cells: %i",numOfShares);
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+	}
+	cell.textLabel.text = @"Select a Boxee server.";
+	return cell;
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- 
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source.
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
- }   
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"libraryView: %i",libraryType);
-    RootViewControllerPhone* firstLevelViewController = [self.navigationController.viewControllers objectAtIndex:0];
-    
+    //NSLog(@"libraryView: %i",libraryType);    
     if ((numOfShares > 0) && (isLibraryDirectory == NO)) {
         if (isRootDirectory == YES) {
             [tableView deselectRowAtIndexPath:indexPath	animated:YES];
             NSString *path = [[mediaShares objectAtIndex:indexPath.row] objectAtIndex:2];
-            UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithPath:path title:[self.tableView cellForRowAtIndexPath:indexPath].textLabel.text];
+            UITableViewController *targetViewController = [[FolderTableView_Phone alloc] initWithPath:path title:[self.tableView cellForRowAtIndexPath:indexPath].textLabel.text];
             [self.navigationController pushViewController:targetViewController animated:YES];
             [targetViewController release];
-        } else {
-            NSString *type = [[dataSource objectAtIndex:indexPath.row] objectAtIndex:2];
-            
-            if ([type isEqualToString:@"tFolder"]) {
-                
-                [tableView deselectRowAtIndexPath:indexPath	animated:YES];
-                
-                NSString *path = [[dataSource objectAtIndex:indexPath.row] objectAtIndex:0];
-                
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithPath:path title:[self.tableView cellForRowAtIndexPath:indexPath].textLabel.text];
-                
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-                
-            } else if ([type isEqualToString:@"tFile"]) {
-                
-                NSArray *currentObject = [dataSource objectAtIndex:indexPath.row];
-                DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
-                
-                MediaItem *media = [[MediaItem alloc] init];
-                
-                NSDictionary *fileInfo = [m_boxee getInfoForFile:[currentObject objectAtIndex:0]];
-                
-                if ([fileInfo valueForKey:@"strTitle"] != nil) {
-                    media.strShowName = [fileInfo valueForKey:@"strTitle"];
-                    media.strDescription = [fileInfo valueForKey:@"strDescription"];
-                    media.strCover = [fileInfo valueForKey:@"strCover"];
-                } else {
-                    NSArray *filename = [[currentObject objectAtIndex:0] componentsSeparatedByString:@"/"];
-                    media.strShowName = [filename objectAtIndex:[filename count] - 1];
-                    firstLevelViewController.detailViewController.thumbnailView.image = nil;
-                    media.strDescription = @"";
-                }
-                media.strPath = [currentObject objectAtIndex:0];
-                media.strTitle = viewTitle;
-                
-                targetViewController.mediaItem = media;
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-            }
         }
     } else if ((numOfShares > 0) && (isLibraryDirectory == YES)) {
         if (isRootDirectory == YES) {
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
             if (indexPath.row == 0) {
                 //TV Show
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithTVShows];
+                UITableViewController *targetViewController = [[TVShowsTableView_Phone alloc] initWithTVShows];
                 [self.navigationController pushViewController:targetViewController animated:YES];
                 [targetViewController release];
                 libraryType = 0;
                 //NSLog(@"Clicked TV show.");
             } else if (indexPath.row == 1) {
                 libraryType = 1;
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithMovies];
+                UITableViewController *targetViewController = [[MoviesTableView_Phone alloc] initWithMovies];
                 [self.navigationController pushViewController:targetViewController animated:YES];
                 [targetViewController release];
                 //NSLog(@"Clicked movies.");
             } else if (indexPath.row == 2) {
                 //Music
                 //NSLog(@"Clicked music.");
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithMusic];
+                UITableViewController *targetViewController = [[MusicTableView_Phone alloc] initWithMusic];
                 [self.navigationController pushViewController:targetViewController animated:YES];
                 [targetViewController release];
             } else if (indexPath.row == 3) {
                 //NSLog(@"Clicked file.");
                 isRootDirectory = YES;
                 isLibraryDirectory = NO;
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithFiles];
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-            }
-        } else if ([self.title isEqualToString:@"Music"]) {
-            if (indexPath.row == 0) {
-                libraryType = 5;
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithAlbums];
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-                //NSLog(@"Clicked albums");
-            } else if (indexPath.row == 1) {
-                libraryType = 6;
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithArtists];
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-                //NSLog(@"Clicked Artists.");
-            }
-        } else {
-            //Sub library directory
-            if ([[self.tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"TVShowCell"]) {
-                //Touched TV Show.
-                //NSLog(@"Touched TV show.");
-                libraryType = 4;
-                //RootViewControllerPhone* firstLevelViewController = [self.navigationController.viewControllers objectAtIndex:0];
-                NSString *tvShow = [self.tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithTVShow:tvShow];
-                curShowName = [self.tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-                
-            } else if ([[self.tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"EpisodeCell"]) {
-                //Touched TV episode.
-                //NSLog(@"Touched tv episode.");
-                
-                NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
-                DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
-                                
-                MediaItem *media = [[MediaItem alloc] init];
-                media.strShowName = viewTitle;
-                media.strTitle = [currentObject valueForKey:@"strTitle"];
-                media.strPath = [currentObject valueForKey:@"strPath"];
-                media.strDescription = [currentObject valueForKey:@"strDescription"];
-                media.iEpisode = [NSNumber numberWithInt:[[currentObject valueForKey:@"iEpisode"] intValue]];
-                media.iSeason = [NSNumber numberWithInt:[[currentObject valueForKey:@"iSeason"] intValue]];
-                media.strCover = [currentObject valueForKey:@"strCover"];
-                                
-                targetViewController.mediaItem = media;
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-                
-            } else if ([[self.tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"MovieCell"]) {
-                //NSLog(@"Touched movie.");
-                
-                NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
-                DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
-                
-                MediaItem *media = [[MediaItem alloc] init];
-                
-                NSString *dir = [m_boxee getDirectorForVideo:[currentObject valueForKey:@"idVideo"]];
-                
-                media.strShowName = [currentObject valueForKey:@"strTitle"];
-                if (dir != nil) {
-                    media.strTitle = dir;
-                } else {
-                    media.strTitle = @"";
-                }
-                media.strPath = [currentObject valueForKey:@"strPath"];
-                media.strDescription = [currentObject valueForKey:@"strDescription"];
-                media.strCover = [currentObject valueForKey:@"strCover"];
-                
-                targetViewController.mediaItem = media;
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-    
-            } else if ([[self.tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"AlbumCell"]) {
-                libraryType = 7;
-                NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
-                NSString *album = [currentObject valueForKey:@"idAlbum"];
-                //NSLog(@"Clicked on album id: %@",album);
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithAlbum:album Name:[currentObject valueForKey:@"strTitle"]];
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-            } else if ([[self.tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"ArtistCell"]) {
-                //NSLog(@"Clicked on artist.");
-                NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
-                NSString *artist = [currentObject valueForKey:@"idArtist"];
-                //NSLog(@"Clicked on artist id: %@",artist);
-                UITableViewController *targetViewController = [[RootViewControllerPhone alloc] initWithArtist:artist Name:[currentObject valueForKey:@"strName"]];
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-            } else if ([[self.tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"AlbumSongCell"]) {
-                //NSLog(@"Clicked on album song.");
-                NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
-                DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
-                
-                MediaItem *media = [[MediaItem alloc] init];
-                
-                media.strShowName = [currentObject valueForKey:@"strTitle"];
-                media.strPath = [currentObject valueForKey:@"strPath"];
-                media.strTitle = [m_boxee getArtistWithID:[currentObject valueForKey:@"idArtist"]];                
-                
-                media.strDescription = @"";
-                
-                //NSData *thumbData = [m_boxee getFile:[m_boxee getArtworkForAlbum:[currentObject valueForKey:@"idAlbum"]]];
-                //UIImage *thumbnail = [UIImage imageWithData:thumbData];
-                
-                //firstLevelViewController.detailViewController.thumbnailView.image = thumbnail;
-                targetViewController.mediaItem = media;
-                [self.navigationController pushViewController:targetViewController animated:YES];
-                [targetViewController release];
-                
-            } else if ([[self.tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"ArtistSongCell"]) {
-                //NSLog(@"Clicked on artist song.");
-                NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
-                DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
-                
-                MediaItem *media = [[MediaItem alloc] init];
-                
-                media.strShowName = [currentObject valueForKey:@"strTitle"];
-                media.strPath = [currentObject valueForKey:@"strPath"];
-                media.strTitle = [m_boxee getArtistWithID:[currentObject valueForKey:@"idArtist"]];
-                media.strDescription = @"";
-
-                targetViewController.mediaItem = media;
+                UITableViewController *targetViewController = [[FilesTableView_Phone alloc] initWithFiles];
                 [self.navigationController pushViewController:targetViewController animated:YES];
                 [targetViewController release];
             }

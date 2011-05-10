@@ -79,6 +79,16 @@
 		0983DB9A136376EF0090D189 /* RootViewControllerPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 0983DB99136376EF0090D189 /* RootViewControllerPhone.m */; };
 		099020A91342C8DA002E996B /* downIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 099020A81342C8DA002E996B /* downIcon.png */; };
 		099020AC1342C8E5002E996B /* upicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 099020AB1342C8E5002E996B /* upicon.png */; };
+		09A7A7E113797B8F00418DC6 /* TVShowsTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7E013797B8F00418DC6 /* TVShowsTableView-Phone.m */; };
+		09A7A7E413797D9300418DC6 /* TVShowTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7E313797D9300418DC6 /* TVShowTableView-Phone.m */; };
+		09A7A7E713797F8D00418DC6 /* MoviesTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7E613797F8C00418DC6 /* MoviesTableView-Phone.m */; };
+		09A7A7EA13798BC300418DC6 /* MusicTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7E913798BC300418DC6 /* MusicTableView-Phone.m */; };
+		09A7A7ED1379938E00418DC6 /* AlbumsTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7EC1379938E00418DC6 /* AlbumsTableView-Phone.m */; };
+		09A7A7F01379959700418DC6 /* ArtistsTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7EF1379959600418DC6 /* ArtistsTableView-Phone.m */; };
+		09A7A7F31379980200418DC6 /* AlbumTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7F21379980200418DC6 /* AlbumTableView-Phone.m */; };
+		09A7A7F61379997900418DC6 /* ArtistTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7F51379997900418DC6 /* ArtistTableView-Phone.m */; };
+		09A7A7F913799AE700418DC6 /* FilesTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7F813799AE600418DC6 /* FilesTableView-Phone.m */; };
+		09A7A7FC13799C8E00418DC6 /* FolderTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7FB13799C8D00418DC6 /* FolderTableView-Phone.m */; };
 		09C956CA133EF5E3006729AE /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C956C9133EF5E3006729AE /* AsyncUdpSocket.m */; };
 		09C956CC133EF71C006729AE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C956CB133EF71C006729AE /* CFNetwork.framework */; };
 		09C956CF133EFD43006729AE /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C956CE133EFD42006729AE /* NSString+MD5.m */; };
@@ -219,6 +229,26 @@
 		0983DB99136376EF0090D189 /* RootViewControllerPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewControllerPhone.m; sourceTree = "<group>"; };
 		099020A81342C8DA002E996B /* downIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downIcon.png; sourceTree = "<group>"; };
 		099020AB1342C8E5002E996B /* upicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upicon.png; sourceTree = "<group>"; };
+		09A7A7DF13797B8F00418DC6 /* TVShowsTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TVShowsTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7E013797B8F00418DC6 /* TVShowsTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TVShowsTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7E213797D9300418DC6 /* TVShowTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TVShowTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7E313797D9300418DC6 /* TVShowTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TVShowTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7E513797F8C00418DC6 /* MoviesTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MoviesTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7E613797F8C00418DC6 /* MoviesTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MoviesTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7E813798BC200418DC6 /* MusicTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MusicTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7E913798BC300418DC6 /* MusicTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MusicTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7EB1379938E00418DC6 /* AlbumsTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AlbumsTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7EC1379938E00418DC6 /* AlbumsTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AlbumsTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7EE1379959500418DC6 /* ArtistsTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ArtistsTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7EF1379959600418DC6 /* ArtistsTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ArtistsTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7F11379980100418DC6 /* AlbumTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AlbumTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7F21379980200418DC6 /* AlbumTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AlbumTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7F41379997800418DC6 /* ArtistTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ArtistTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7F51379997900418DC6 /* ArtistTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ArtistTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7F713799AE500418DC6 /* FilesTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FilesTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7F813799AE600418DC6 /* FilesTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FilesTableView-Phone.m"; sourceTree = "<group>"; };
+		09A7A7FA13799C8B00418DC6 /* FolderTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FolderTableView-Phone.h"; sourceTree = "<group>"; };
+		09A7A7FB13799C8D00418DC6 /* FolderTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FolderTableView-Phone.m"; sourceTree = "<group>"; };
 		09C956C8133EF5E3006729AE /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		09C956C9133EF5E3006729AE /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		09C956CB133EF71C006729AE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -478,6 +508,7 @@
 		0981EB801363510200BF2510 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				09A7A7DE13797B4300418DC6 /* Table View Controllers */,
 				0981EB7B1363507E00BF2510 /* Resources */,
 				0981EB7213634FA400BF2510 /* Boxee_RemoteAppDelegate-Phone.h */,
 				0981EB7313634FA400BF2510 /* Boxee_RemoteAppDelegate-Phone.m */,
@@ -535,6 +566,33 @@
 				0983DB8B13636C660090D189 /* UpDefault.png */,
 			);
 			path = remoteimg;
+			sourceTree = "<group>";
+		};
+		09A7A7DE13797B4300418DC6 /* Table View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				09A7A7DF13797B8F00418DC6 /* TVShowsTableView-Phone.h */,
+				09A7A7E013797B8F00418DC6 /* TVShowsTableView-Phone.m */,
+				09A7A7E213797D9300418DC6 /* TVShowTableView-Phone.h */,
+				09A7A7E313797D9300418DC6 /* TVShowTableView-Phone.m */,
+				09A7A7E513797F8C00418DC6 /* MoviesTableView-Phone.h */,
+				09A7A7E613797F8C00418DC6 /* MoviesTableView-Phone.m */,
+				09A7A7E813798BC200418DC6 /* MusicTableView-Phone.h */,
+				09A7A7E913798BC300418DC6 /* MusicTableView-Phone.m */,
+				09A7A7EB1379938E00418DC6 /* AlbumsTableView-Phone.h */,
+				09A7A7EC1379938E00418DC6 /* AlbumsTableView-Phone.m */,
+				09A7A7EE1379959500418DC6 /* ArtistsTableView-Phone.h */,
+				09A7A7EF1379959600418DC6 /* ArtistsTableView-Phone.m */,
+				09A7A7F11379980100418DC6 /* AlbumTableView-Phone.h */,
+				09A7A7F21379980200418DC6 /* AlbumTableView-Phone.m */,
+				09A7A7F41379997800418DC6 /* ArtistTableView-Phone.h */,
+				09A7A7F51379997900418DC6 /* ArtistTableView-Phone.m */,
+				09A7A7F713799AE500418DC6 /* FilesTableView-Phone.h */,
+				09A7A7F813799AE600418DC6 /* FilesTableView-Phone.m */,
+				09A7A7FA13799C8B00418DC6 /* FolderTableView-Phone.h */,
+				09A7A7FB13799C8D00418DC6 /* FolderTableView-Phone.m */,
+			);
+			name = "Table View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -730,6 +788,16 @@
 				095C152213750146006026B6 /* ArtistTableView.m in Sources */,
 				095C1525137507F8006026B6 /* FilesTableView.m in Sources */,
 				095C15281375080A006026B6 /* FolderTableView.m in Sources */,
+				09A7A7E113797B8F00418DC6 /* TVShowsTableView-Phone.m in Sources */,
+				09A7A7E413797D9300418DC6 /* TVShowTableView-Phone.m in Sources */,
+				09A7A7E713797F8D00418DC6 /* MoviesTableView-Phone.m in Sources */,
+				09A7A7EA13798BC300418DC6 /* MusicTableView-Phone.m in Sources */,
+				09A7A7ED1379938E00418DC6 /* AlbumsTableView-Phone.m in Sources */,
+				09A7A7F01379959700418DC6 /* ArtistsTableView-Phone.m in Sources */,
+				09A7A7F31379980200418DC6 /* AlbumTableView-Phone.m in Sources */,
+				09A7A7F61379997900418DC6 /* ArtistTableView-Phone.m in Sources */,
+				09A7A7F913799AE700418DC6 /* FilesTableView-Phone.m in Sources */,
+				09A7A7FC13799C8E00418DC6 /* FolderTableView-Phone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

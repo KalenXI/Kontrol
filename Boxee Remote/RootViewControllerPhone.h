@@ -11,6 +11,13 @@
 #import "SettingsViewControllerPhone.h"
 #import "DetailViewPhone.h"
 
+#import "TVShowTableView-Phone.h"
+#import "TVShowsTableView-Phone.h"
+#import "MoviesTableView-Phone.h"
+#import "FolderTableView-Phone.h"
+#import "MusicTableView-Phone.h"
+#import "FilesTableView-Phone.h"
+
 @class DetailViewController;
 
 @interface RootViewControllerPhone : UITableViewController <UINavigationControllerDelegate> {
