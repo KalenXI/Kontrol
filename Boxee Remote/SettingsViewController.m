@@ -97,11 +97,6 @@ NSString * const hideServerPopupNotification = @"hideServerPopup";
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    //Configure the cell.
-    //BoxeeServer *server = [m_boxee.boxeeServerList objectAtIndex:indexPath.row];
-    //cell.textLabel.text = server.hostName;
-    //cell.textLabel.text = @"Placeholder.";
-    
     if ([m_boxee.boxeeServerList count] > 0) {
         BoxeeServer *server = [m_boxee.boxeeServerList objectAtIndex:indexPath.row];
         cell.textLabel.text = server.hostName;
@@ -133,7 +128,6 @@ NSString * const hideServerPopupNotification = @"hideServerPopup";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if ((alertView == passwordAlert) && (buttonIndex == 1)) {
-        NSLog(@"Password: %@",passwordField.text);
 		m_boxee.serverPassword = passwordField.text;
 		if ([m_boxee isPasswordProtected]) {
 			[m_boxee showAlert:@"Authentication failed."];
@@ -164,7 +158,6 @@ NSString * const hideServerPopupNotification = @"hideServerPopup";
 	//NSLog(@"lastServerPort: %@",[defaults stringForKey:@"lastServerPort"]);
     [serverListVIew reloadData];
     if ([m_boxee isPasswordProtected]) {
-        // Ask for Username and password.
 		passwordAlert = [[UIAlertView alloc] initWithTitle:@"Boxee Authentication" message:@"\n \n \n \n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
 		
 		UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.0, 40.0, 260.0, 50.0)];

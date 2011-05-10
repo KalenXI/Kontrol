@@ -12,13 +12,6 @@
 		093CCACF137253FA0095FA1A /* TVShowsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCACE137253FA0095FA1A /* TVShowsTableView.m */; };
 		093CCAD213725CDA0095FA1A /* TVShowTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCAD113725CDA0095FA1A /* TVShowTableView.m */; };
 		093CCAD5137262CD0095FA1A /* RSSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCAD4137262CD0095FA1A /* RSSTableView.m */; };
-		093CCAE21372887B0095FA1A /* TSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCADB1372887B0095FA1A /* TSAlertView.m */; };
-		093CCAE31372887B0095FA1A /* TSAlertViewBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 093CCADC1372887B0095FA1A /* TSAlertViewBackground.png */; };
-		093CCAE41372887B0095FA1A /* TSAlertViewBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = 093CCADD1372887B0095FA1A /* TSAlertViewBackground2.png */; };
-		093CCAE51372887B0095FA1A /* TSAlertViewButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 093CCADE1372887B0095FA1A /* TSAlertViewButtonBackground.png */; };
-		093CCAE61372887B0095FA1A /* TSAlertViewButtonBackground_Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 093CCADF1372887B0095FA1A /* TSAlertViewButtonBackground_Highlighted.png */; };
-		093CCAE71372887B0095FA1A /* TSAlertViewCancelButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 093CCAE01372887B0095FA1A /* TSAlertViewCancelButtonBackground.png */; };
-		093CCAE81372887B0095FA1A /* TSAlertViewMessageListViewShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 093CCAE11372887B0095FA1A /* TSAlertViewMessageListViewShadow.png */; };
 		09496AF9136A6368007D5053 /* library.png in Resources */ = {isa = PBXBuildFile; fileRef = 09496AF8136A6368007D5053 /* library.png */; };
 		095A2953133D510000F4FC9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095A2952133D510000F4FC9A /* UIKit.framework */; };
 		095A2955133D510000F4FC9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095A2954133D510000F4FC9A /* Foundation.framework */; };
@@ -52,6 +45,14 @@
 		095A29D4133DBB1200F4FC9A /* icon_volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 095A29D3133DBB1200F4FC9A /* icon_volume.png */; };
 		095A29E5133DE4FC00F4FC9A /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 095A29E3133DE4EF00F4FC9A /* SplashScreenViewController.m */; };
 		095A29E6133DE4FC00F4FC9A /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095A29E4133DE4F400F4FC9A /* SplashScreenViewController.xib */; };
+		095C15121374F81D006026B6 /* MoviesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C15111374F81D006026B6 /* MoviesTableView.m */; };
+		095C15151374FB0D006026B6 /* MusicTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C15141374FB0D006026B6 /* MusicTableView.m */; };
+		095C15181374FE12006026B6 /* AlbumsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C15171374FE11006026B6 /* AlbumsTableView.m */; };
+		095C151B1374FE22006026B6 /* ArtistsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C151A1374FE22006026B6 /* ArtistsTableView.m */; };
+		095C151F13750130006026B6 /* AlbumTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C151E13750130006026B6 /* AlbumTableView.m */; };
+		095C152213750146006026B6 /* ArtistTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C152113750146006026B6 /* ArtistTableView.m */; };
+		095C1525137507F8006026B6 /* FilesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C1524137507F7006026B6 /* FilesTableView.m */; };
+		095C15281375080A006026B6 /* FolderTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C152713750809006026B6 /* FolderTableView.m */; };
 		097D678D1363DCD9008E8584 /* icon_volume_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 097D678B1363DCD9008E8584 /* icon_volume_down.png */; };
 		097D678E1363DCD9008E8584 /* icon_volume_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 097D678C1363DCD9008E8584 /* icon_volume_up.png */; };
 		097D67981363E0E3008E8584 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 097D67971363E0E3008E8584 /* Default@2x.png */; };
@@ -125,14 +126,6 @@
 		093CCAD113725CDA0095FA1A /* TVShowTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowTableView.m; sourceTree = "<group>"; };
 		093CCAD3137262CD0095FA1A /* RSSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSTableView.h; sourceTree = "<group>"; };
 		093CCAD4137262CD0095FA1A /* RSSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSTableView.m; sourceTree = "<group>"; };
-		093CCADA1372887B0095FA1A /* TSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSAlertView.h; sourceTree = "<group>"; };
-		093CCADB1372887B0095FA1A /* TSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSAlertView.m; sourceTree = "<group>"; };
-		093CCADC1372887B0095FA1A /* TSAlertViewBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TSAlertViewBackground.png; sourceTree = "<group>"; };
-		093CCADD1372887B0095FA1A /* TSAlertViewBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TSAlertViewBackground2.png; sourceTree = "<group>"; };
-		093CCADE1372887B0095FA1A /* TSAlertViewButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TSAlertViewButtonBackground.png; sourceTree = "<group>"; };
-		093CCADF1372887B0095FA1A /* TSAlertViewButtonBackground_Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TSAlertViewButtonBackground_Highlighted.png; sourceTree = "<group>"; };
-		093CCAE01372887B0095FA1A /* TSAlertViewCancelButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TSAlertViewCancelButtonBackground.png; sourceTree = "<group>"; };
-		093CCAE11372887B0095FA1A /* TSAlertViewMessageListViewShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TSAlertViewMessageListViewShadow.png; sourceTree = "<group>"; };
 		09496AF8136A6368007D5053 /* library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library.png; sourceTree = "<group>"; };
 		095A294E133D510000F4FC9A /* Kontrol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontrol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095A2952133D510000F4FC9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -177,6 +170,22 @@
 		095A29E2133DE4ED00F4FC9A /* SplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreenViewController.h; sourceTree = "<group>"; };
 		095A29E3133DE4EF00F4FC9A /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreenViewController.m; sourceTree = "<group>"; };
 		095A29E4133DE4F400F4FC9A /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
+		095C15101374F81D006026B6 /* MoviesTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviesTableView.h; sourceTree = "<group>"; };
+		095C15111374F81D006026B6 /* MoviesTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviesTableView.m; sourceTree = "<group>"; };
+		095C15131374FB0D006026B6 /* MusicTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicTableView.h; sourceTree = "<group>"; };
+		095C15141374FB0D006026B6 /* MusicTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicTableView.m; sourceTree = "<group>"; };
+		095C15161374FE11006026B6 /* AlbumsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumsTableView.h; sourceTree = "<group>"; };
+		095C15171374FE11006026B6 /* AlbumsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumsTableView.m; sourceTree = "<group>"; };
+		095C15191374FE21006026B6 /* ArtistsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistsTableView.h; sourceTree = "<group>"; };
+		095C151A1374FE22006026B6 /* ArtistsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistsTableView.m; sourceTree = "<group>"; };
+		095C151D1375012F006026B6 /* AlbumTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTableView.h; sourceTree = "<group>"; };
+		095C151E13750130006026B6 /* AlbumTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTableView.m; sourceTree = "<group>"; };
+		095C152013750146006026B6 /* ArtistTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtistTableView.h; sourceTree = "<group>"; };
+		095C152113750146006026B6 /* ArtistTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistTableView.m; sourceTree = "<group>"; };
+		095C1523137507F6006026B6 /* FilesTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesTableView.h; sourceTree = "<group>"; };
+		095C1524137507F7006026B6 /* FilesTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesTableView.m; sourceTree = "<group>"; };
+		095C152613750809006026B6 /* FolderTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderTableView.h; sourceTree = "<group>"; };
+		095C152713750809006026B6 /* FolderTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderTableView.m; sourceTree = "<group>"; };
 		097D678B1363DCD9008E8584 /* icon_volume_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_volume_down.png; sourceTree = "<group>"; };
 		097D678C1363DCD9008E8584 /* icon_volume_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_volume_up.png; sourceTree = "<group>"; };
 		097D67971363E0E3008E8584 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -272,29 +281,20 @@
 		093CCACC137253B60095FA1A /* Table View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				093CCACD137253FA0095FA1A /* TVShowsTableView.h */,
+				095C151C1374FE6D006026B6 /* Headers */,
 				093CCACE137253FA0095FA1A /* TVShowsTableView.m */,
-				093CCAD013725CDA0095FA1A /* TVShowTableView.h */,
 				093CCAD113725CDA0095FA1A /* TVShowTableView.m */,
-				093CCAD3137262CD0095FA1A /* RSSTableView.h */,
 				093CCAD4137262CD0095FA1A /* RSSTableView.m */,
+				095C15111374F81D006026B6 /* MoviesTableView.m */,
+				095C15141374FB0D006026B6 /* MusicTableView.m */,
+				095C15171374FE11006026B6 /* AlbumsTableView.m */,
+				095C151A1374FE22006026B6 /* ArtistsTableView.m */,
+				095C151E13750130006026B6 /* AlbumTableView.m */,
+				095C152113750146006026B6 /* ArtistTableView.m */,
+				095C1524137507F7006026B6 /* FilesTableView.m */,
+				095C152713750809006026B6 /* FolderTableView.m */,
 			);
 			name = "Table View Controllers";
-			sourceTree = "<group>";
-		};
-		093CCAD91372887B0095FA1A /* TSAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				093CCADA1372887B0095FA1A /* TSAlertView.h */,
-				093CCADB1372887B0095FA1A /* TSAlertView.m */,
-				093CCADC1372887B0095FA1A /* TSAlertViewBackground.png */,
-				093CCADD1372887B0095FA1A /* TSAlertViewBackground2.png */,
-				093CCADE1372887B0095FA1A /* TSAlertViewButtonBackground.png */,
-				093CCADF1372887B0095FA1A /* TSAlertViewButtonBackground_Highlighted.png */,
-				093CCAE01372887B0095FA1A /* TSAlertViewCancelButtonBackground.png */,
-				093CCAE11372887B0095FA1A /* TSAlertViewMessageListViewShadow.png */,
-			);
-			path = TSAlertView;
 			sourceTree = "<group>";
 		};
 		095A2943133D510000F4FC9A = {
@@ -424,6 +424,24 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		095C151C1374FE6D006026B6 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				093CCACD137253FA0095FA1A /* TVShowsTableView.h */,
+				093CCAD013725CDA0095FA1A /* TVShowTableView.h */,
+				093CCAD3137262CD0095FA1A /* RSSTableView.h */,
+				095C15101374F81D006026B6 /* MoviesTableView.h */,
+				095C15131374FB0D006026B6 /* MusicTableView.h */,
+				095C15161374FE11006026B6 /* AlbumsTableView.h */,
+				095C151D1375012F006026B6 /* AlbumTableView.h */,
+				095C152013750146006026B6 /* ArtistTableView.h */,
+				095C15191374FE21006026B6 /* ArtistsTableView.h */,
+				095C1523137507F6006026B6 /* FilesTableView.h */,
+				095C152613750809006026B6 /* FolderTableView.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
 		0981EB7B1363507E00BF2510 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,7 +498,6 @@
 		0981EB811363510900BF2510 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				093CCAD91372887B0095FA1A /* TSAlertView */,
 				0983DB8413636C660090D189 /* remoteimg */,
 				0983DB821363696E0090D189 /* remotecontroller.png */,
 				09E8CE71135B7EBA00644DE1 /* AsyncSocket.h */,
@@ -645,12 +662,6 @@
 				097D67981363E0E3008E8584 /* Default@2x.png in Resources */,
 				097D679A1363E0EF008E8584 /* Default.png in Resources */,
 				09496AF9136A6368007D5053 /* library.png in Resources */,
-				093CCAE31372887B0095FA1A /* TSAlertViewBackground.png in Resources */,
-				093CCAE41372887B0095FA1A /* TSAlertViewBackground2.png in Resources */,
-				093CCAE51372887B0095FA1A /* TSAlertViewButtonBackground.png in Resources */,
-				093CCAE61372887B0095FA1A /* TSAlertViewButtonBackground_Highlighted.png in Resources */,
-				093CCAE71372887B0095FA1A /* TSAlertViewCancelButtonBackground.png in Resources */,
-				093CCAE81372887B0095FA1A /* TSAlertViewMessageListViewShadow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,7 +722,14 @@
 				093CCACF137253FA0095FA1A /* TVShowsTableView.m in Sources */,
 				093CCAD213725CDA0095FA1A /* TVShowTableView.m in Sources */,
 				093CCAD5137262CD0095FA1A /* RSSTableView.m in Sources */,
-				093CCAE21372887B0095FA1A /* TSAlertView.m in Sources */,
+				095C15121374F81D006026B6 /* MoviesTableView.m in Sources */,
+				095C15151374FB0D006026B6 /* MusicTableView.m in Sources */,
+				095C15181374FE12006026B6 /* AlbumsTableView.m in Sources */,
+				095C151B1374FE22006026B6 /* ArtistsTableView.m in Sources */,
+				095C151F13750130006026B6 /* AlbumTableView.m in Sources */,
+				095C152213750146006026B6 /* ArtistTableView.m in Sources */,
+				095C1525137507F8006026B6 /* FilesTableView.m in Sources */,
+				095C15281375080A006026B6 /* FolderTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,7 +946,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "Boxee Remote/Kontrol-Info.plist";
 				PRODUCT_NAME = Kontrol;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1155E803-EEBD-44B2-BA1F-B164EDE38F06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D67A472-99F2-487D-8C28-E43AB118FAC2";
 				STRIP_STYLE = debugging;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

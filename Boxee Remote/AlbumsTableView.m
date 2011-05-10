@@ -1,21 +1,39 @@
 //
-//  RSSTableView.m
+//  AlbumsTableView.m
 //  Kontrol
 //
-//  Created by Kevin Vinck on 5/5/11.
+//  Created by Kevin Vinck on 5/7/11.
 //  Copyright 2011 None. All rights reserved.
 //
 
-#import "RSSTableView.h"
+#import "AlbumsTableView.h"
 
 
-@implementation RSSTableView
+@implementation AlbumsTableView
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+-(id)initWithAlbums {
+    self = [super init];
+    if (self) {
+        //NSLog(@"initWithPath");
+        viewTitle = @"Albums";
+        m_boxee = [BoxeeHTTPInterface sharedInstance];
+        NSSortDescriptor *sortByTitle = [[NSSortDescriptor alloc] initWithKey:@"strTitle" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+        dataSource = [[m_boxee getAlbums] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortByTitle]];
+        [sortByTitle release];
+        [dataSource retain];
+        isRootDirectory = NO;
+        isLibraryDirectory = YES;
+        libraryType = 5;
+        numOfShares = [dataSource count];
     }
     return self;
 }
@@ -39,11 +57,11 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    myQueue = dispatch_queue_create("com.lastdit.kontrol", NULL);
+    
+    self.clearsSelectionOnViewWillAppear = NO;
+    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+    self.title = viewTitle;
 }
 
 - (void)viewDidUnload
@@ -55,21 +73,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    rssFeeds = [defaults valueForKey:@"rssFeeds"];
-	
-    if (rssFeeds == nil) {
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        rssFeeds = [[NSMutableArray alloc] init];
-        
-        [dict setValue:@"Crunchyroll" forKey:@"Name"];
-        [dict setValue:@"something" forKey:@"URL"];
-        
-        [rssFeeds addObject:dict];
-        
-        
-    }
-    
     [super viewWillAppear:animated];
 }
 
@@ -98,25 +101,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return numOfShares;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"AlbumCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
+    cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }
@@ -130,7 +135,8 @@
 }
 */
 
-
+/*
+// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -141,7 +147,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-
+*/
 
 /*
 // Override to support rearranging the table view.
@@ -163,14 +169,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    libraryType = 7;
+	NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
+	NSString *album = [currentObject valueForKey:@"idAlbum"];
+	//NSLog(@"Clicked on album id: %@",album);
+	UITableViewController *targetViewController = [[AlbumTableView alloc] initWithAlbum:album Name:[currentObject valueForKey:@"strTitle"]];
+	[self.navigationController pushViewController:targetViewController animated:YES];
+	[targetViewController release];
 }
 
 @end

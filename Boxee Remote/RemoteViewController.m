@@ -89,6 +89,8 @@
 	return YES;
 }
 
+#pragma mark - Button code
+
 - (void)buttonTouch:(NSTimer *)sender {
     if ([[sender userInfo] isEqualToString:@"Up"]) {
         [m_boxee sendKey:270];
@@ -111,6 +113,8 @@
         [holdTimer invalidate];
     holdTimer = nil;
 }
+
+#pragma mark - Remote buttons
 
 - (IBAction)selectButtonClicked:(id)sender {
     [m_boxee sendKey:256];
@@ -210,6 +214,8 @@
                                                 repeats:YES];
 }
 
+#pragma mark - System buttons
+
 - (IBAction)nowPlayingClicked:(id)sender {
     [m_boxee action:18];
 }
@@ -241,6 +247,8 @@
 - (IBAction)appsClicked:(id)sender {
     [m_boxee activateWindow:10482];
 }
+
+#pragma mark - Video buttons
 
 - (IBAction)viewModeClicked:(id)sender {
     [m_boxee action:19];

@@ -11,6 +11,9 @@
 #import "SettingsViewController.h"
 #import "SettingsViewControllerPhone.h"
 #import "TVShowsTableView.h"
+#import "MoviesTableView.h"
+#import "MusicTableView.h"
+#import "FilesTableView.h"
 
 @class DetailViewController;
 
@@ -27,13 +30,6 @@
 }
 
 -(id)initWithPath:(NSString *)path title:(NSString*)title;
--(id)initWithTVShow:(NSString *)show;
--(id)initWithMovies;
--(id)initWithMusic;
--(id)initWithArtists;
--(id)initWithAlbums;
--(id)initWithAlbum:(NSString *)album Name:(NSString *)name;
--(id)initWithArtist:(NSString *)artist Name:(NSString *)name;
 -(id)initWithFiles;
 
 extern NSString * const hideMediaListPopupNotification;

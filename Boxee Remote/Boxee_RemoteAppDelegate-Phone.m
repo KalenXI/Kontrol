@@ -82,7 +82,6 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if ((alertView == passwordAlert) && (buttonIndex == 1)) {
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        NSLog(@"Password: %@",passwordField.text);
 		m_boxee.serverPassword = passwordField.text;
 		if ([m_boxee isPasswordProtected]) {
 			[m_boxee showAlert:@"Authentication failed."];

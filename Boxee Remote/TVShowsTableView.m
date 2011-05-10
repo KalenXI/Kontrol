@@ -27,13 +27,11 @@ dispatch_queue_t myQueue;
 -(id)initWithTVShows {
     self = [super init];
     if (self) {
-        NSLog(@"initWithTVShows");
         viewTitle = @"TV Shows";
         m_boxee = [BoxeeHTTPInterface sharedInstance];
         NSSortDescriptor *sortByTitle = [[NSSortDescriptor alloc] initWithKey:@"strTitle" ascending:YES selector:@selector(caseInsensitiveCompare:)];
         dataSource = [[m_boxee getTVShows] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortByTitle]];
         [sortByTitle release];
-        NSLog(@"dataSource: %@",dataSource);
         [dataSource retain];
         isRootDirectory = NO;
         isLibraryDirectory = YES;
@@ -62,11 +60,11 @@ dispatch_queue_t myQueue;
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    myQueue = dispatch_queue_create("com.lastdit.kontrol", NULL);
+    
+    self.clearsSelectionOnViewWillAppear = NO;
+    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+    self.title = viewTitle;
 }
 
 - (void)viewDidUnload

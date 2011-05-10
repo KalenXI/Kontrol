@@ -24,14 +24,6 @@
 {
     // Override point for customization after application launch.
     // Add the split view controller's view to the window and display.
-#if TARGET_IPHONE_SIMULATOR == 0
-    /*NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory
-                         stringByAppendingPathComponent:@"console.log"];
-    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"w",stderr);*/
-#endif
     self.window.rootViewController = self.splitViewController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -74,12 +66,6 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-}
-
--(void) displayView:(int)intNewView {
-    //NSLog(@"Telling controller to load new view.");
-    //[_detailViewController view];
-    //[_detailViewController displayView:intNewView];
 }
 
 - (void)dealloc

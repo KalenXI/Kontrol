@@ -94,13 +94,11 @@
 }
 
 - (void)setupTimer {
-    NSLog(@"Setting up timer.");
     nowPlayingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 
                                                        target:self
                                                      selector:@selector(refreshPlayingStatus:) 
                                                      userInfo:nil 
                                                       repeats:YES];
-    NSLog(@"%@",nowPlayingTimer);
 }
 
 

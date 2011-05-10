@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "GradientButton.h"
 #import "BoxeeHTTPInterface.h"
-#import "TSAlertView.h"
 
 @interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate> {
     BoxeeHTTPInterface *m_boxee;
