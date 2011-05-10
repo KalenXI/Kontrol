@@ -168,6 +168,7 @@ UIViewController *currentViewController;
     if ([popover isPopoverVisible]) {
         [popover dismissPopoverAnimated:YES];
     } else {
+	[self removePopover];
     RemoteViewController *remote = [[RemoteViewController alloc] init];
     popover = [[UIPopoverController alloc]
               initWithContentViewController:remote];
@@ -179,13 +180,14 @@ UIViewController *currentViewController;
     [popover presentPopoverFromBarButtonItem:sender 
                     permittedArrowDirections:UIPopoverArrowDirectionAny 
                                     animated:YES];
-    }
+	}
 }
 
 - (IBAction)settingsTapped:(id)sender {
     if ([popover isPopoverVisible]) {
         [popover dismissPopoverAnimated:YES];
     } else {
+		[self removePopover];
         SettingsViewController *settings = [[SettingsViewController alloc] init];
         popover = [[UIPopoverController alloc]
                    initWithContentViewController:settings];
@@ -197,7 +199,7 @@ UIViewController *currentViewController;
         [popover presentPopoverFromBarButtonItem:sender 
                         permittedArrowDirections:UIPopoverArrowDirectionAny 
                                         animated:YES];
-    }
+	}
 }
 
 - (IBAction)addToQueueButtonClicked:(id)sender {
@@ -256,6 +258,10 @@ UIViewController *currentViewController;
 }
 
 - (IBAction)showKeyboard:(id)sender {
+	[self removePopover];
+	//if (self.popover != nil) {
+    //    [self.popover dismissPopoverAnimated:YES];
+    //}
     if ([keyboardField isFirstResponder]) {
         [keyboardField resignFirstResponder];
     } else {
@@ -529,6 +535,12 @@ UIViewController *currentViewController;
     //NSLog(@"Releasing items");
     [items release];
     self.popoverController = pc;
+}
+
+- (void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController *)aViewController {
+	if (self.popover != nil) {
+        [self.popover dismissPopoverAnimated:YES];
+    }
 }
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.
