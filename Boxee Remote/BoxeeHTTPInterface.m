@@ -34,7 +34,7 @@ dispatch_queue_t myQueue;
     isConnected = NO;
     myQueue = dispatch_queue_create("com.lastdit.kontrol", NULL);
     return self;    
-
+	
 }
 
 - (void) showAlert:(NSString *)text {
@@ -44,33 +44,33 @@ dispatch_queue_t myQueue;
 }
 
 -(BOOL) ping {
-   //NSLog(@"pinging server");
+	//NSLog(@"pinging server");
     NSString *response;
     response = [self getPage: [self getURLForCommand:@"GetCurrentlyPlaying"] timeout: 3.0];
-   //NSLog(@"Ping response: %@",response);
+	//NSLog(@"Ping response: %@",response);
     if (([response isEqualToString:@""]) || (response == nil)) {
-       //NSLog(@"ping failed");
+		//NSLog(@"ping failed");
         return NO;
     } else {
-       //NSLog(@"Ping sucessful.");
+		//NSLog(@"Ping sucessful.");
         return YES;
     }
     /*pingSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
-    pingrecvSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
-    [pingSocket setDelegate:self];
-    [pingSocket enableBroadcast:YES error:nil];
-    [pingSocket bindToPort:38400 error:nil];
-    [pingSocket connectToHost:serverIP onPort:2562 error:nil];
-    [pingrecvSocket enableBroadcast:YES error:nil];
-    [pingrecvSocket bindToPort:38400 error:nil];
-    [pingrecvSocket receiveWithTimeout:1 tag:1];
-    NSString *signature = @"BoxMoteb0xeeRem0tE!";
-    NSString *xml = [NSString stringWithFormat:@"<?xml version=\"1.0\"?><BDP1 cmd=\"discover\" application=\"iphone_remote\" version=\"1.0\" challenge=\"BoxMote\" signature=\"%@\"/>",[signature MD5]];
-    NSData *data = [NSData dataWithData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
-    [pingSocket sendData:data withTimeout:1 tag:1];
-    [pingSocket closeAfterSending];
-    [pingrecvSocket closeAfterReceiving];
-    //[pingrecvSocket release];*/
+	 pingrecvSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
+	 [pingSocket setDelegate:self];
+	 [pingSocket enableBroadcast:YES error:nil];
+	 [pingSocket bindToPort:38400 error:nil];
+	 [pingSocket connectToHost:serverIP onPort:2562 error:nil];
+	 [pingrecvSocket enableBroadcast:YES error:nil];
+	 [pingrecvSocket bindToPort:38400 error:nil];
+	 [pingrecvSocket receiveWithTimeout:1 tag:1];
+	 NSString *signature = @"BoxMoteb0xeeRem0tE!";
+	 NSString *xml = [NSString stringWithFormat:@"<?xml version=\"1.0\"?><BDP1 cmd=\"discover\" application=\"iphone_remote\" version=\"1.0\" challenge=\"BoxMote\" signature=\"%@\"/>",[signature MD5]];
+	 NSData *data = [NSData dataWithData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
+	 [pingSocket sendData:data withTimeout:1 tag:1];
+	 [pingSocket closeAfterSending];
+	 [pingrecvSocket closeAfterReceiving];
+	 //[pingrecvSocket release];*/
     //return YES;
 }
 
@@ -87,7 +87,7 @@ dispatch_queue_t myQueue;
     [recvSocket receiveWithTimeout:3 tag:0];
     NSString *signature = @"BoxMoteb0xeeRem0tE!";
     NSString *xml = [NSString stringWithFormat:@"<?xml version=\"1.0\"?><BDP1 cmd=\"discover\" application=\"iphone_remote\" version=\"1.0\" challenge=\"BoxMote\" signature=\"%@\"/>",[signature MD5]];
-   //NSLog(@"Sending string: %@",xml);
+	//NSLog(@"Sending string: %@",xml);
     NSData *data = [NSData dataWithData:[xml dataUsingEncoding:NSUTF8StringEncoding]];
     [socket sendData:data withTimeout:5 tag:0];
     [socket closeAfterSending];
@@ -126,7 +126,7 @@ dispatch_queue_t myQueue;
 - (BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port {
     
     //NSLog(@"Data received with tag: %ld on port %i",tag,port);
-   //NSLog(@"Received data: %@",[NSString stringWithUTF8String:[data bytes]]);
+	//NSLog(@"Received data: %@",[NSString stringWithUTF8String:[data bytes]]);
     
     if (sock == recvSocket) {
         //NSLog(@"Server request received.");
@@ -357,7 +357,7 @@ dispatch_queue_t myQueue;
         [self showAlert:@"getShares: Could not extract lines from response."];
         return nil;
     }
-
+	
 }
 
 -(NSArray *)getSharesOfType:(NSString *)type {
@@ -379,7 +379,7 @@ dispatch_queue_t myQueue;
         //NSLog(@"Releasing mediaitems");
         [mediaItems release];
         //NSLog(@"getShares done");
-    
+		
         return returnArray;
     } else {
         [self showAlert:@"getSharesOfType: Could not extract lines from response."];
@@ -401,7 +401,7 @@ dispatch_queue_t myQueue;
             }
             //NSLog(@"Items: %@",items);
             NSMutableArray *mediaItem = [[NSMutableArray alloc] initWithCapacity:2];
-
+			
             if ([[items objectAtIndex:[items count]-1] isEqualToString:@""]) {
                 //NSLog(@"This is a folder!");
                 [mediaItem addObject:[theLines objectAtIndex:i]];
@@ -413,7 +413,7 @@ dispatch_queue_t myQueue;
                 [mediaItem addObject:[items objectAtIndex:[items count]-1]];
                 [mediaItem addObject:@"tFile"];
             }
-
+			
             [mediaItems addObject:mediaItem];
             //NSLog(@"Releasing mediaitem");
             [mediaItem release];
@@ -424,7 +424,7 @@ dispatch_queue_t myQueue;
         //NSLog(@"Releasing mediaitems");
         [mediaItems release];
         //NSLog(@"getShares done");
-    
+		
         return returnArray;
     } else {
         [self showAlert:@"getDirectory: Unable to read lines from response."];
@@ -440,12 +440,12 @@ dispatch_queue_t myQueue;
     //NSMutableArray *paramArray = [[NSMutableArray alloc] initWithCapacity:1];
     //[paramArray addObject:@"q:\\web\\thumb.jpg"];
     if ([self getLines: [self getPage: [self getURLForCommand:@"GetCurrentlyPlaying"] timeout: 1.0] lines: theLines]) {
-            //NSLog(@"Releasing paramarray");
-            //[paramArray release];
-            for (i=0; i<[theLines count]; ++i)
-            {
-                int p = (int)[[theLines objectAtIndex:i] rangeOfString:@":"].location;
-                if (p!=NSNotFound)
+		//NSLog(@"Releasing paramarray");
+		//[paramArray release];
+		for (i=0; i<[theLines count]; ++i)
+		{
+			int p = (int)[[theLines objectAtIndex:i] rangeOfString:@":"].location;
+			if (p!=NSNotFound)
             {
                 [itemInfo setValue:[[theLines objectAtIndex:i] substringFromIndex:p+1] forKey:[[theLines objectAtIndex:i] substringToIndex:p]];
             }
@@ -480,7 +480,7 @@ dispatch_queue_t myQueue;
 #pragma mark Database Commands
 
 -(BOOL)isDatabaseEnabled {
-   //NSLog(@"Checking if database is enabled.");
+	//NSLog(@"Checking if database is enabled.");
     NSString *query = @"select idSeries,strTitle,strBoxeeId,strCover,strDescription,strGenre,iYear from series";
     NSURL *sendURL = [self getURLForCommand:@"queryvideodatabase" parameters:[NSArray arrayWithObject:query]];
     NSString *response = [self getPage:sendURL timeout:5.0];
@@ -665,22 +665,22 @@ dispatch_queue_t myQueue;
 
 -(NSString*) getPage: (NSURL*) url timeout: (double) timeoutVal {
     
-   //NSLog(@"Getting page: %@",url);
+	//NSLog(@"Getting page: %@",url);
     NSURLRequest* request = [NSURLRequest requestWithURL: url
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
                                          timeoutInterval:timeoutVal];
-
+	
     NSError *error;
     NSData *responseData;
     NSURLResponse *response;
     responseData = [ NSURLConnection sendSynchronousRequest:request
                                           returningResponse:&response error:&error];
-        
+	
     NSString *page;             
-       //NSLog(@"Loading response data...");
-        // convert tostring
-        page = [[[NSString alloc] initWithData: responseData encoding:NSUTF8StringEncoding] autorelease];
-       //NSLog(@"Response data loaded...");
+	//NSLog(@"Loading response data...");
+	// convert tostring
+	page = [[[NSString alloc] initWithData: responseData encoding:NSUTF8StringEncoding] autorelease];
+	//NSLog(@"Response data loaded...");
     if ([page rangeOfString:@"Error:Unknown command"].location != NSNotFound) {
         //[self showAlert:@"Error: Unknown command."];
         return @"Error:Unknown command";
@@ -700,39 +700,39 @@ dispatch_queue_t myQueue;
 -(int)getLines: (NSString*) text lines: (NSMutableArray*)theLines
 {
     // Note: uncomment this to see the text
-   //NSLog(@"getLines:  %@", text);
+	//NSLog(@"getLines:  %@", text);
     if (text != nil) {
-        if ([text rangeOfString:@"Error"].location != NSNotFound) {
-            [self showAlert:text];
-            return 0;
-        }
-    int p, p1;
-    NSString* tmp;
-    p = (int)[text rangeOfString:@"<li>"].location;
-    while((p!=NSNotFound))
-    {
-        NSString *s = [NSString stringWithFormat:@"%C", 0xa];
-        p1 = (int)[text rangeOfString:s options:NSLiteralSearch range: NSMakeRange(p, [text length] - p)].location;
-        if (p1 == NSNotFound)
-        {
-            p1 = [text length];
-        }
-        tmp = [text substringWithRange:NSMakeRange(p+4,p1-p-4)];
-        if ([[tmp substringWithRange:NSMakeRange([tmp length]-1,1)] compare: @">"] == NSOrderedSame)
-        {
-            p = [tmp rangeOfString:@"<" options:NSBackwardsSearch ].location;
-            if (p != NSNotFound)
-            {
-                tmp = [tmp substringWithRange:NSMakeRange(0, p)];
-            }
-        }
-        //NSLog(@"found a line: %@", tmp);
-        [theLines addObject: tmp];
-        p = (int)[text rangeOfString:@"<li>" options:NSCaseInsensitiveSearch range: NSMakeRange(p1, [text length] - p1)].location;
-    }
-    //NSLog(@"getLines:  %@",theLines);
-    //[theLines removeAllObjects];
-    return ([theLines count] > 0);
+        //if ([text rangeOfString:@"Error"].location != NSNotFound) {
+        //    [self showAlert:text];
+        //    return 0;
+        //}
+		int p, p1;
+		NSString* tmp;
+		p = (int)[text rangeOfString:@"<li>"].location;
+		while((p!=NSNotFound))
+		{
+			NSString *s = [NSString stringWithFormat:@"%C", 0xa];
+			p1 = (int)[text rangeOfString:s options:NSLiteralSearch range: NSMakeRange(p, [text length] - p)].location;
+			if (p1 == NSNotFound)
+			{
+				p1 = [text length];
+			}
+			tmp = [text substringWithRange:NSMakeRange(p+4,p1-p-4)];
+			if ([[tmp substringWithRange:NSMakeRange([tmp length]-1,1)] compare: @">"] == NSOrderedSame)
+			{
+				p = [tmp rangeOfString:@"<" options:NSBackwardsSearch ].location;
+				if (p != NSNotFound)
+				{
+					tmp = [tmp substringWithRange:NSMakeRange(0, p)];
+				}
+			}
+			//NSLog(@"found a line: %@", tmp);
+			[theLines addObject: tmp];
+			p = (int)[text rangeOfString:@"<li>" options:NSCaseInsensitiveSearch range: NSMakeRange(p1, [text length] - p1)].location;
+		}
+		//NSLog(@"getLines:  %@",theLines);
+		//[theLines removeAllObjects];
+		return ([theLines count] > 0);
     } else {
         return 0;
     }
@@ -743,63 +743,63 @@ dispatch_queue_t myQueue;
     // Note: uncomment this to see the text
     //NSLog(@"getLines:  %@", text);
     if (text != nil) {
-    int p, p1;
-    NSString* tmp;
-    
-    NSMutableArray *dataLines = [[NSMutableArray alloc] init];
-    NSMutableDictionary *dataLine = [[NSMutableDictionary alloc] init];
-    NSMutableArray *fieldArray = [[NSMutableArray alloc] init];
-    
-    p = (int)[text rangeOfString:@"<field>"].location;
-    while ((p != NSNotFound)) {
-        p1 = (int)[text rangeOfString:@"</field>" options:NSLiteralSearch range:NSMakeRange(p, [text length] - p)].location;
-        tmp = [text substringWithRange:NSMakeRange(p+7, p1-p-7)];
-        //NSLog(@"Found a field: %@",tmp);
-        [fieldArray addObject:tmp];
-        p = (int)[text rangeOfString:@"<field>" options:NSCaseInsensitiveSearch range:NSMakeRange(p1, [text length] - p1)].location;
-    }
-    
-    p = (int)[query rangeOfString:@"select "].location;
-    p1 = (int)[query rangeOfString:@" from" options:NSLiteralSearch range:NSMakeRange(p, [query length] - p)].location;
-    tmp = [query substringWithRange:NSMakeRange(p+7, p1-p-7)];
-    //NSLog(@"Query fields: %@",tmp);
-    
-    NSArray *queryFields = [tmp componentsSeparatedByString:@","];
-    //NSLog(@"Query fields: %@",queryFields);
-    
-    int f;
-    int qField = 0;
-    //NSLog(@"Number of fields: %i",[fieldArray count]);
-    //NSLog(@"Number of queries: %i",[queryFields count]);
-    for (f=0;f<[fieldArray count];f++) {
-        //NSLog(@"Adding field %i for query %i",f,qField);
-        NSString *field = [fieldArray objectAtIndex:f];
-        NSString *fieldName = [queryFields objectAtIndex:qField];
-        if (dataLine == nil) {
-            dataLine = [[NSMutableDictionary alloc] init];
-        }
-        if ([fieldName rangeOfString:@"str"].location == 0) {
-            [dataLine setValue:field forKey:fieldName];
-        } else if ([fieldName rangeOfString:@"i"].location == 0) {
-            [dataLine setValue:[NSNumber numberWithInt:[field intValue]] forKey:fieldName];
-        } else {
-            [dataLine setValue:field forKey:fieldName];
-        }
-        qField++;
-        if (qField == ([queryFields count])) {
-            //NSLog(@"Reached end of line");
-            //NSLog(@"Line: %@",dataLine);
-            qField = 0;
-            [dataLines addObject:dataLine];
-            //NSLog(@"Releasing dataline.");
-            [dataLine release];
-            dataLine = nil;
-        }
-        //[field autorelease];
-        //[fieldName autorelease];
-    }
-    //[dataLines removeAllObjects];
-    return [dataLines autorelease];
+		int p, p1;
+		NSString* tmp;
+		
+		NSMutableArray *dataLines = [[NSMutableArray alloc] init];
+		NSMutableDictionary *dataLine = [[NSMutableDictionary alloc] init];
+		NSMutableArray *fieldArray = [[NSMutableArray alloc] init];
+		
+		p = (int)[text rangeOfString:@"<field>"].location;
+		while ((p != NSNotFound)) {
+			p1 = (int)[text rangeOfString:@"</field>" options:NSLiteralSearch range:NSMakeRange(p, [text length] - p)].location;
+			tmp = [text substringWithRange:NSMakeRange(p+7, p1-p-7)];
+			//NSLog(@"Found a field: %@",tmp);
+			[fieldArray addObject:tmp];
+			p = (int)[text rangeOfString:@"<field>" options:NSCaseInsensitiveSearch range:NSMakeRange(p1, [text length] - p1)].location;
+		}
+		
+		p = (int)[query rangeOfString:@"select "].location;
+		p1 = (int)[query rangeOfString:@" from" options:NSLiteralSearch range:NSMakeRange(p, [query length] - p)].location;
+		tmp = [query substringWithRange:NSMakeRange(p+7, p1-p-7)];
+		//NSLog(@"Query fields: %@",tmp);
+		
+		NSArray *queryFields = [tmp componentsSeparatedByString:@","];
+		//NSLog(@"Query fields: %@",queryFields);
+		
+		int f;
+		int qField = 0;
+		//NSLog(@"Number of fields: %i",[fieldArray count]);
+		//NSLog(@"Number of queries: %i",[queryFields count]);
+		for (f=0;f<[fieldArray count];f++) {
+			//NSLog(@"Adding field %i for query %i",f,qField);
+			NSString *field = [fieldArray objectAtIndex:f];
+			NSString *fieldName = [queryFields objectAtIndex:qField];
+			if (dataLine == nil) {
+				dataLine = [[NSMutableDictionary alloc] init];
+			}
+			if ([fieldName rangeOfString:@"str"].location == 0) {
+				[dataLine setValue:field forKey:fieldName];
+			} else if ([fieldName rangeOfString:@"i"].location == 0) {
+				[dataLine setValue:[NSNumber numberWithInt:[field intValue]] forKey:fieldName];
+			} else {
+				[dataLine setValue:field forKey:fieldName];
+			}
+			qField++;
+			if (qField == ([queryFields count])) {
+				//NSLog(@"Reached end of line");
+				//NSLog(@"Line: %@",dataLine);
+				qField = 0;
+				[dataLines addObject:dataLine];
+				//NSLog(@"Releasing dataline.");
+				[dataLine release];
+				dataLine = nil;
+			}
+			//[field autorelease];
+			//[fieldName autorelease];
+		}
+		//[dataLines removeAllObjects];
+		return [dataLines autorelease];
     } else {
         return nil;
     }

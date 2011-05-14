@@ -14,7 +14,7 @@
 @implementation RootViewController
 
 NSString * const hideMediaListPopupNotification = @"HideMediaPopup";
-		
+
 @synthesize detailViewController,isRootDirectory,isLibraryDirectory,libraryType;
 
 dispatch_queue_t myQueue;
@@ -119,23 +119,23 @@ dispatch_queue_t myQueue;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
-    		
+	
 }
 
-		
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ((numOfShares > 0) && (isLibraryDirectory == NO)) {
-        return numOfShares;
+		return numOfShares;
     } else if ((numOfShares > 0) && (isLibraryDirectory == YES)) {
-        return 4;
+		return 4;
     } else {
-        return 1;
+		return 1;
     }
-    		
+	
 }
 
-		
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ((numOfShares > 0) && (isLibraryDirectory == NO) && (isRootDirectory == YES)) {
@@ -144,7 +144,7 @@ dispatch_queue_t myQueue;
 		
 		if ([replyString isEqualToString:@"Error"]) {
 			static NSString *CellIdentifier = @"ErrorCell";
-                
+			
 			UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
 				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
@@ -154,7 +154,7 @@ dispatch_queue_t myQueue;
 		}
 		
 		static NSString *CellIdentifier = @"Cell";
-            
+		
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
@@ -166,12 +166,12 @@ dispatch_queue_t myQueue;
     } else if ((numOfShares > 0) && (isLibraryDirectory == YES) && (isRootDirectory == YES)) {
 		//Return cells for root library directory.
 		static NSString *CellIdentifier = @"Cell";
-            
+		
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
 		}
-            
+		
 		switch (indexPath.row) {
 			case 0:
 				cell.textLabel.text = @"TV Shows";
@@ -256,9 +256,9 @@ dispatch_queue_t myQueue;
 			[self.navigationController pushViewController:targetViewController animated:YES];
 			[targetViewController release];
 		}
-     } else {
-         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     }
+	} else {
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}
 }
 
 #pragma mark - Memory management

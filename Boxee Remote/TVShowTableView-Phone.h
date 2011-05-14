@@ -11,18 +11,30 @@
 #import "SettingsViewControllerPhone.h"
 #import "DetailViewPhone.h"
 
-@interface TVShowTableView_Phone : UITableViewController {
+@interface TVShowTableView_Phone : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate> {
     BoxeeHTTPInterface *m_boxee;
     NSArray *mediaShares;
     NSArray *dataSource;
+	NSMutableArray *tableData;
+	NSMutableArray *tableSearch;
     NSString *viewTitle;
     NSString *curShowName;
     int numOfShares;
     BOOL isRootDirectory;
     BOOL isLibraryDirectory;
     int libraryType;
+	NSMutableArray *seasons;
+	NSMutableArray *seasonEpNums;
+	
+	UISearchBar *searchBar;
+	UISearchDisplayController *searchDC;
+	
+	BOOL isSearching;
 }
 
--(id)initWithTVShow:(NSString *)show;
+@property (nonatomic,retain) UISearchBar *searchBar;
+@property (nonatomic,retain) UISearchDisplayController *searchDC;
 
+
+-(id)initWithTVShow:(NSString *)show;
 @end

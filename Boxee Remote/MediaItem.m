@@ -68,47 +68,6 @@
     return self;
 }
 
--(MediaItem*)createMediaItem:(NSString*)name path:(NSString*)path isFolder:(BOOL)isFolder
-{
-    MediaType type;
-    NSString* extension = [self getFileExtension: path];
-    if (isFolder)
-    {
-        if ([extension caseInsensitiveCompare: @".m3u"] == NSOrderedSame)
-        {
-            type = kPlaylist;
-        }
-        else
-        {
-            type = kFolder;
-        }
-    }
-    else
-    {
-        //determine type from extension
-        
-        if ([self isInArray: extension array:m_musicExtensions])
-        {
-            type = kMusic;
-        }
-        else if ([self isInArray: extension array:m_pictureExtensions])
-        {
-            type = kPicture;
-        }
-        else if ([self isInArray: extension array:m_videoExtensions])
-        {
-            type = kVideo;
-        }
-        
-        else
-        {
-            type = kUnknown;
-        }
-        
-    }
-    //return [[[MediaItem alloc] initWithNameAndPath: name path:path  mediaType:type] autorelease];
-    return nil;
-}
 
 -(NSString*)getFileExtension:(NSString*)path
 {

@@ -57,7 +57,7 @@ UIViewController *currentViewController;
         // Update the view.
         [self configureView];
     }
-
+	
     if (self.popoverController != nil) {
         [self.popoverController dismissPopoverAnimated:YES];
     }        
@@ -100,9 +100,9 @@ UIViewController *currentViewController;
         //NSLog(@"center.y = %f",popupView.center.y);
         //NSLog(@"height = %f",popupView.frame.size.height);
         //NSLog(@"pos.y = %f",pos.y);
-     }
-     popupView.center = pos;
-     [UIView commitAnimations];
+	}
+	popupView.center = pos;
+	[UIView commitAnimations];
 }
 
 - (void)popupMessage:(NSString *)msg {
@@ -168,18 +168,18 @@ UIViewController *currentViewController;
     if ([popover isPopoverVisible]) {
         [popover dismissPopoverAnimated:YES];
     } else {
-	[self removePopover];
-    RemoteViewController *remote = [[RemoteViewController alloc] init];
-    popover = [[UIPopoverController alloc]
-              initWithContentViewController:remote];
-    //NSLog(@"Releasing remote");
-    [remote release];
-    
-    popover.popoverContentSize = CGSizeMake(312, 339);
-    
-    [popover presentPopoverFromBarButtonItem:sender 
-                    permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                    animated:YES];
+		[self removePopover];
+		RemoteViewController *remote = [[RemoteViewController alloc] init];
+		popover = [[UIPopoverController alloc]
+				   initWithContentViewController:remote];
+		//NSLog(@"Releasing remote");
+		[remote release];
+		
+		popover.popoverContentSize = CGSizeMake(312, 339);
+		
+		[popover presentPopoverFromBarButtonItem:sender 
+						permittedArrowDirections:UIPopoverArrowDirectionAny 
+										animated:YES];
 	}
 }
 
@@ -401,92 +401,92 @@ UIViewController *currentViewController;
 
 - (void) refreshPlayingStatus:(NSTimer *)timer {
     if (timer == nowPlayingTimer) {
-    [timer invalidate];
-    //NSLog(@"////////Refreshing playing status.\\\\\\\\\\\\");
-    NSMutableDictionary *currentStatus = [m_boxee getCurrentlyPlayingInfo];
+		[timer invalidate];
+		//NSLog(@"////////Refreshing playing status.\\\\\\\\\\\\");
+		NSMutableDictionary *currentStatus = [m_boxee getCurrentlyPlayingInfo];
         if (currentStatus != nil) {
-    //NSLog(@"Getting volume");
-    [currentStatus retain];
-    if ([[currentStatus valueForKey:@"Filename"] isEqualToString:@"[Nothing Playing]"]) {
-        [self setPlaybackControlsStatus:0];
-        nowPlayingButton.enabled = NO;
-        //NSLog(@"Nothing is playing.");
-    } else if ([currentStatus valueForKey:@"Filename"] == nil) {
-        //NSLog(@"Server not found.");
-        nowPlayingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 
-                                                           target:self
-                                                         selector:@selector(refreshPlayingStatus:) 
-                                                         userInfo:nil 
-                                                          repeats:YES];
-        return;
-    } else {
-        nowPlayingButton.enabled = YES;
-        //A file is currently playing.
-        //NSLog(@"Something is playing: %@",[currentStatus valueForKey:@"Filename"]);
-        
-        if (nowPlayingWindowStatus == 0) {
-            [self setPlaybackControlsStatus:1];
-        }
-        
-        if ([[currentStatus valueForKey:@"PlayStatus"] isEqualToString:@"Playing"]) {
-            playButton.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_controls_4.png" ofType:nil]]; 
-        } else {
-            playButton.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_controls_3.png" ofType:nil]];
-        }
-        
-        if (([currentStatus valueForKey:@"Title"] != nil) && ([currentStatus valueForKey:@"Show Title"] != nil)) {
-            nowPlayingTitleLabel.text = [NSString stringWithFormat:@"%@ - %@",[currentStatus valueForKey:@"Show Title"],[currentStatus valueForKey:@"Title"]];
-        } else if ([currentStatus valueForKey:@"Title"] != nil) {
-            nowPlayingTitleLabel.text = [currentStatus valueForKey:@"Title"];
-        } else {
-            NSArray *filename = [[currentStatus valueForKey:@"Filename"] componentsSeparatedByString:@"/"];
-            nowPlayingTitleLabel.text = [filename objectAtIndex:[filename count] - 1];
-        }
-        
-        if ([currentStatus valueForKey:@"Plot"] != nil) {
-            nowPlayingDescriptionView.text = [currentStatus valueForKey:@"Plot"];
-        } else {
-           nowPlayingDescriptionView.text = @"No description available.";
-        }
-        
-        if (![nowPlayingThumbnailURL isEqualToString:[currentStatus valueForKey:@"Thumb"]]) {
-            NSData *thumbnailData = [m_boxee getFile:[currentStatus valueForKey:@"Thumb"]];
-            nowPlayingImageView.image = [UIImage imageWithData:thumbnailData];
-            nowPlayingThumbnailURL = [currentStatus valueForKey:@"Thumb"];
-        }
-        
-        nowPlayingPositionSlider.value = [[currentStatus valueForKey:@"Percentage"] intValue];
-        nowPlayingDurationLabel.text = [currentStatus valueForKey:@"Duration"];
-        nowPlayingTimeLabel.text = [currentStatus valueForKey:@"Time"];
-    }
-    //NSLog(@"Releasing current status.");
-    //[currentStatus release];
-    //currentStatus = nil;
-    int volume = [m_boxee getVolume];
-    volumeSlider.value = volume;
-    //NSLog(@"\\\\\\\\\\\\\\Done refreshing playing status./////////////");
-        nowPlayingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 
-                                                           target:self
-                                                         selector:@selector(refreshPlayingStatus:) 
-                                                         userInfo:nil 
-                                                          repeats:YES];
-    }
+			//NSLog(@"Getting volume");
+			[currentStatus retain];
+			if ([[currentStatus valueForKey:@"Filename"] isEqualToString:@"[Nothing Playing]"]) {
+				[self setPlaybackControlsStatus:0];
+				nowPlayingButton.enabled = NO;
+				//NSLog(@"Nothing is playing.");
+			} else if ([currentStatus valueForKey:@"Filename"] == nil) {
+				//NSLog(@"Server not found.");
+				nowPlayingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 
+																   target:self
+																 selector:@selector(refreshPlayingStatus:) 
+																 userInfo:nil 
+																  repeats:YES];
+				return;
+			} else {
+				nowPlayingButton.enabled = YES;
+				//A file is currently playing.
+				//NSLog(@"Something is playing: %@",[currentStatus valueForKey:@"Filename"]);
+				
+				if (nowPlayingWindowStatus == 0) {
+					[self setPlaybackControlsStatus:1];
+				}
+				
+				if ([[currentStatus valueForKey:@"PlayStatus"] isEqualToString:@"Playing"]) {
+					playButton.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_controls_4.png" ofType:nil]]; 
+				} else {
+					playButton.imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"icon_controls_3.png" ofType:nil]];
+				}
+				
+				if (([currentStatus valueForKey:@"Title"] != nil) && ([currentStatus valueForKey:@"Show Title"] != nil)) {
+					nowPlayingTitleLabel.text = [NSString stringWithFormat:@"%@ - %@",[currentStatus valueForKey:@"Show Title"],[currentStatus valueForKey:@"Title"]];
+				} else if ([currentStatus valueForKey:@"Title"] != nil) {
+					nowPlayingTitleLabel.text = [currentStatus valueForKey:@"Title"];
+				} else {
+					NSArray *filename = [[currentStatus valueForKey:@"Filename"] componentsSeparatedByString:@"/"];
+					nowPlayingTitleLabel.text = [filename objectAtIndex:[filename count] - 1];
+				}
+				
+				if ([currentStatus valueForKey:@"Plot"] != nil) {
+					nowPlayingDescriptionView.text = [currentStatus valueForKey:@"Plot"];
+				} else {
+					nowPlayingDescriptionView.text = @"No description available.";
+				}
+				
+				if (![nowPlayingThumbnailURL isEqualToString:[currentStatus valueForKey:@"Thumb"]]) {
+					NSData *thumbnailData = [m_boxee getFile:[currentStatus valueForKey:@"Thumb"]];
+					nowPlayingImageView.image = [UIImage imageWithData:thumbnailData];
+					nowPlayingThumbnailURL = [currentStatus valueForKey:@"Thumb"];
+				}
+				
+				nowPlayingPositionSlider.value = [[currentStatus valueForKey:@"Percentage"] intValue];
+				nowPlayingDurationLabel.text = [currentStatus valueForKey:@"Duration"];
+				nowPlayingTimeLabel.text = [currentStatus valueForKey:@"Time"];
+			}
+			//NSLog(@"Releasing current status.");
+			//[currentStatus release];
+			//currentStatus = nil;
+			int volume = [m_boxee getVolume];
+			volumeSlider.value = volume;
+			//NSLog(@"\\\\\\\\\\\\\\Done refreshing playing status./////////////");
+			nowPlayingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 
+															   target:self
+															 selector:@selector(refreshPlayingStatus:) 
+															 userInfo:nil 
+															  repeats:YES];
+		}
     }
 }
 
 - (void)setupTimer {
     //NSLog(@"Setting up timer.");
     nowPlayingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 
-                                    target:self
-                                  selector:@selector(refreshPlayingStatus:) 
-                                  userInfo:nil 
-                                   repeats:YES];
+													   target:self
+													 selector:@selector(refreshPlayingStatus:) 
+													 userInfo:nil 
+													  repeats:YES];
     
     //pingTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 
     //                                                   target:self
-                                                    //selector:@selector(pingServer:) 
-                                                     //userInfo:nil 
-                                                      //repeats:YES];
+	//selector:@selector(pingServer:) 
+	//userInfo:nil 
+	//repeats:YES];
 }
 
 - (IBAction)addToQueue:(id)sender {
@@ -613,16 +613,16 @@ UIViewController *currentViewController;
     }
 }
 
- // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     //NSLog(@"viewDidLoad");
     [super viewDidLoad];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     /*[nc addObserver:self
-           selector:@selector(showPlaybackControls:) 
-               name:showPlaybackControlsNotification
-             object:nil];*/
+	 selector:@selector(showPlaybackControls:) 
+	 name:showPlaybackControlsNotification
+	 object:nil];*/
     [nc addObserver:self
            selector:@selector(settingsTapped:) 
                name:hideServerPopupNotification
@@ -657,17 +657,17 @@ UIViewController *currentViewController;
     m_boxee = [BoxeeHTTPInterface sharedInstance];
     
     /*TSAlertView* av = [[[TSAlertView alloc] init] autorelease];
-    av.title = @"Authorization";
-    av.message = @"Your Boxee server requires a password.";
-    
-    [av addButtonWithTitle: @"Cancel"];
-    [av addButtonWithTitle: @"OK"];
-    
-    av.style = TSAlertViewStyleInput;
-    av.usesMessageTextView = YES;
-    av.buttonLayout = TSAlertViewButtonLayoutNormal;
-    
-    [av show];*/
+	 av.title = @"Authorization";
+	 av.message = @"Your Boxee server requires a password.";
+	 
+	 [av addButtonWithTitle: @"Cancel"];
+	 [av addButtonWithTitle: @"OK"];
+	 
+	 av.style = TSAlertViewStyleInput;
+	 av.usesMessageTextView = YES;
+	 av.buttonLayout = TSAlertViewButtonLayoutNormal;
+	 
+	 [av show];*/
 	
 	NSLog(@"lastServerIP: %@",[defaults stringForKey:@"lastServerIP"]);
 	NSLog(@"lastServerPort: %@",[defaults stringForKey:@"lastServerPort"]);
@@ -777,7 +777,7 @@ UIViewController *currentViewController;
     [self setPopupView:nil];
     [self setPopupLabel:nil];
 	[super viewDidUnload];
-
+	
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	self.popoverController = nil;

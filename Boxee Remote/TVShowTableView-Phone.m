@@ -11,6 +11,8 @@
 
 @implementation TVShowTableView_Phone
 
+@synthesize searchDC,searchBar;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -29,9 +31,37 @@
         NSSortDescriptor *sortBySeason = [[NSSortDescriptor alloc] initWithKey:@"iSeason" ascending:YES];
         NSSortDescriptor *sortByEpisode = [[NSSortDescriptor alloc] initWithKey:@"iEpisode" ascending:YES];
         dataSource = [[m_boxee getEpisodesForTVShow:show] sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortBySeason, sortByEpisode, nil]];
+        tableData = [NSMutableArray arrayWithArray:dataSource];
         [sortBySeason release];
         [sortByEpisode release];
         [dataSource retain];
+        [tableData retain];
+        
+        NSNumber *curSeason;
+		NSNumber *lastSeason;
+		seasons = [[NSMutableArray alloc] init];
+		seasonEpNums = [[NSMutableArray alloc] init];
+		int seasonEpNum = 0;
+		
+		for (int i = 0; i < [dataSource count]; i++) {			
+			curSeason = [[dataSource objectAtIndex:i] valueForKey:@"iSeason"];
+			//NSLog(@"curSeason: %@",curSeason);
+			if (curSeason != lastSeason) {
+				if (seasonEpNum > 0)
+					[seasonEpNums addObject:[NSNumber numberWithInt:seasonEpNum]];
+				seasonEpNum = 1;
+				[seasons addObject:curSeason];
+			} else {
+				seasonEpNum++;
+			}
+			
+			if (i == ([dataSource count] - 1)) {
+				[seasonEpNums addObject:[NSNumber numberWithInt:seasonEpNum]];
+			}
+			
+			lastSeason = curSeason;
+		}
+        
         isRootDirectory = NO;
         isLibraryDirectory = YES;
         libraryType = 4;
@@ -60,6 +90,19 @@
     [super viewDidLoad];
 
     self.title = viewTitle;
+    
+    self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)] autorelease];
+	self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+	self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	self.searchBar.keyboardType = UIKeyboardTypeAlphabet;
+	self.searchBar.delegate = self;
+	self.tableView.tableHeaderView = self.searchBar;
+	
+	// Create the search display controller
+	self.searchDC = [[[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self] autorelease];
+	self.searchDC.searchResultsDataSource = self;
+	self.searchDC.searchResultsDelegate = self;
+	self.searchDC.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -97,16 +140,77 @@
 
 #pragma mark - Table view data source
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)sb {
+	//NSLog(@"Clicked Search: %@",sb.text);
+	//[self.tableView setHidden:YES];
+	isSearching = YES;
+	//NSLog(@"Searching");
+	[tableData removeAllObjects];
+	
+	for (NSDictionary* item in dataSource) {
+		NSString *title;
+		title = [item valueForKey:@"strTitle"];
+		
+		if ([title rangeOfString:sb.text options:NSAnchoredSearch].location != NSNotFound) {
+			//NSLog(@"Found title: %@",title);
+			[tableData addObject:item];
+		}
+	}
+	[tableData retain];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+	//NSLog(@"Done searching");
+	isSearching = NO;
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
+	//NSLog(@"Done Searching.");
+	tableData = [NSMutableArray arrayWithArray:dataSource];
+	[tableData retain];
+}
+
+- (void)searchBar:(UISearchBar *)sb textDidChange:(NSString *)searchText {
+	//NSLog(@"Search: %@",sb.text);
+	[tableData removeAllObjects];
+	
+	for (NSDictionary* item in dataSource) {
+		NSString *title;
+		title = [item valueForKey:@"strTitle"];
+		
+		if ([title rangeOfString:sb.text options:(NSAnchoredSearch | NSCaseInsensitiveSearch)].location != NSNotFound) {
+			//NSLog(@"Found title: %@",title);
+			[tableData addObject:item];
+		}
+	}
+	[tableData retain];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 1;
+    if (tableView == self.tableView) {
+		return [seasons count];
+	} else {
+		return 1;
+	}
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return numOfShares;
+    if (tableView == self.tableView) {
+		return [[seasonEpNums objectAtIndex:section] intValue];
+	} else {
+		//NSLog(@"%i results",[tableData count]);
+		return [tableData count];
+	}
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if (tableView == self.tableView) {
+		return [NSString stringWithFormat:@"Season %@",[seasons objectAtIndex:section]];
+	} else {
+		return nil;
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,12 +219,27 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    NSDictionary *curObject = [dataSource objectAtIndex:indexPath.row];
+    int fullRow = 0;
+	
+	for (int i = 0; i < indexPath.section; i++) {
+		//NSLog(@"i: %i",i);
+		//NSLog(@"Location: %i",[[seasonEpNums objectAtIndex:i] intValue]);
+		fullRow = fullRow + [[seasonEpNums objectAtIndex:i] intValue];
+	}
+	
+	if (tableView == self.tableView) {
+		fullRow = fullRow + indexPath.row;
+	} else {
+		fullRow = indexPath.row;
+		//NSLog(@"Did the right thing.");
+	}
+    
+    NSDictionary *curObject = [tableData objectAtIndex:fullRow];
 	cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@",[curObject valueForKey:@"iSeason"],[curObject valueForKey:@"iEpisode"],[curObject valueForKey:@"strTitle"]];
-	cell.detailTextLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strPath"];
+	cell.detailTextLabel.text = [[tableData objectAtIndex:indexPath.row] valueForKey:@"strPath"];
 	cell.detailTextLabel.lineBreakMode = UILineBreakModeHeadTruncation;
     
     return cell;
@@ -169,7 +288,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
+    NSDictionary *currentObject = [tableData objectAtIndex:indexPath.row];
 	DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
 	
 	MediaItem *media = [[MediaItem alloc] init];

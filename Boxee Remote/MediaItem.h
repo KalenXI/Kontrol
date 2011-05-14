@@ -54,7 +54,6 @@ typedef enum {
 }
 
 -(id)initWithExtensions:(NSArray*)musicExtensions pictureExtensions:(NSArray*)pictureExtensions videoExtensions:(NSArray*)videoExtensions;
--(MediaItem*)createMediaItem:(NSString*)name path:(NSString*)path isFolder:(BOOL)isFolder;
 -(BOOL)isInArray:(NSString*) value array:(NSArray*)array;
 -(NSString*)getFileExtension:(NSString*)path;
 -(void)dealloc;
