@@ -151,10 +151,6 @@ dispatch_queue_t myQueue;
 #pragma mark - Search delegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)sb {
-	//NSLog(@"Clicked Search: %@",sb.text);
-	//[self.tableView setHidden:YES];
-	isSearching = YES;
-	//NSLog(@"Searching");
 	[tableData removeAllObjects];
 	
 	for (NSDictionary* item in dataSource) {
@@ -169,19 +165,12 @@ dispatch_queue_t myQueue;
 	[tableData retain];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-	//NSLog(@"Done searching");
-	isSearching = NO;
-}
-
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
-	//NSLog(@"Done Searching.");
 	tableData = [NSMutableArray arrayWithArray:dataSource];
 	[tableData retain];
 }
 
 - (void)searchBar:(UISearchBar *)sb textDidChange:(NSString *)searchText {
-	//NSLog(@"Search: %@",sb.text);
 	[tableData removeAllObjects];
 	
 	for (NSDictionary* item in dataSource) {
@@ -189,7 +178,6 @@ dispatch_queue_t myQueue;
 		title = [item valueForKey:@"strTitle"];
 		
 		if ([title rangeOfString:sb.text options:(NSAnchoredSearch | NSCaseInsensitiveSearch)].location != NSNotFound) {
-			//NSLog(@"Found title: %@",title);
 			[tableData addObject:item];
 		}
 	}
@@ -255,7 +243,7 @@ dispatch_queue_t myQueue;
     
     NSDictionary *curObject = [tableData objectAtIndex:fullRow];
     cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@",[curObject valueForKey:@"iSeason"],[curObject valueForKey:@"iEpisode"],[curObject valueForKey:@"strTitle"]];
-    cell.detailTextLabel.text = [[tableData objectAtIndex:indexPath.row] valueForKey:@"strPath"];
+    cell.detailTextLabel.text = [[tableData objectAtIndex:fullRow] valueForKey:@"strPath"];
     cell.detailTextLabel.lineBreakMode = UILineBreakModeHeadTruncation;
     
     return cell;
@@ -265,8 +253,24 @@ dispatch_queue_t myQueue;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    int fullRow = 0;
+	
+	for (int i = 0; i < indexPath.section; i++) {
+		//NSLog(@"i: %i",i);
+		//NSLog(@"Location: %i",[[seasonEpNums objectAtIndex:i] intValue]);
+		fullRow = fullRow + [[seasonEpNums objectAtIndex:i] intValue];
+	}
+	
+	if (tableView == self.tableView) {
+		fullRow = fullRow + indexPath.row;
+	} else {
+		fullRow = indexPath.row;
+		//NSLog(@"Did the right thing.");
+	}
+    
     RootViewController* firstLevelViewController = [self.navigationController.viewControllers objectAtIndex:0];
-    NSDictionary *currentObject = [tableData objectAtIndex:indexPath.row];
+    NSDictionary *currentObject = [tableData objectAtIndex:fullRow];
     
     MediaItem *media = [[MediaItem alloc] init];
 	

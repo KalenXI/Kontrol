@@ -239,7 +239,7 @@
     
     NSDictionary *curObject = [tableData objectAtIndex:fullRow];
 	cell.textLabel.text = [NSString stringWithFormat:@"%@-%@ %@",[curObject valueForKey:@"iSeason"],[curObject valueForKey:@"iEpisode"],[curObject valueForKey:@"strTitle"]];
-	cell.detailTextLabel.text = [[tableData objectAtIndex:indexPath.row] valueForKey:@"strPath"];
+	cell.detailTextLabel.text = [[tableData objectAtIndex:fullRow] valueForKey:@"strPath"];
 	cell.detailTextLabel.lineBreakMode = UILineBreakModeHeadTruncation;
     
     return cell;
@@ -288,7 +288,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *currentObject = [tableData objectAtIndex:indexPath.row];
+    
+    int fullRow = 0;
+	
+	for (int i = 0; i < indexPath.section; i++) {
+		//NSLog(@"i: %i",i);
+		//NSLog(@"Location: %i",[[seasonEpNums objectAtIndex:i] intValue]);
+		fullRow = fullRow + [[seasonEpNums objectAtIndex:i] intValue];
+	}
+	
+	if (tableView == self.tableView) {
+		fullRow = fullRow + indexPath.row;
+	} else {
+		fullRow = indexPath.row;
+		//NSLog(@"Did the right thing.");
+	}
+    
+    NSDictionary *currentObject = [tableData objectAtIndex:fullRow];
 	DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
 	
 	MediaItem *media = [[MediaItem alloc] init];

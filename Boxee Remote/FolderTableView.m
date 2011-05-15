@@ -139,6 +139,7 @@
         
 	}
     
+    cell.textLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
 	cell.textLabel.text = [cellObject objectAtIndex:1];
 	cell.detailTextLabel.text = [cellObject objectAtIndex:0];
 	return cell;

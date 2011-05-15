@@ -17,7 +17,7 @@ NSString * const FoundServerNotification = @"FoundServer";
 NSString * const ConnectionLostNotification = @"LostConnection";
 
 @implementation BoxeeHTTPInterface
-@synthesize boxeeServerList,serverIP,serverPort,serverPassword,isBoxeeBox,isConnected;
+@synthesize boxeeServerList,serverIP,serverPort,serverPassword,isConnected;
 
 dispatch_queue_t myQueue;
 
@@ -94,6 +94,14 @@ dispatch_queue_t myQueue;
     [recvSocket closeAfterReceiving];
     //NSLog(@"Releasing recvsocket");
     //[recvSocket release];
+}
+
+-(BOOL)isBoxeeBox {
+    if ([[self getPage: [self getURLForCommand:@"getshares"] timeout: 5] isEqualToString:@"Error:Unknown command"]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 -(void)lostServerConnection {
@@ -337,10 +345,7 @@ dispatch_queue_t myQueue;
     int i;
     NSMutableArray *theLines = [[NSMutableArray alloc] init];
     if ([self getLines: [self getPage: [self getURLForCommand:@"getshares"] timeout: 5] lines: theLines]) {
-        if ([[theLines objectAtIndex:0] isEqualToString:@"Error"]) {
-            //NSLog(@"Found a boxee box...");
-            isBoxeeBox = YES;
-        }
+        //NSLog(@"Lines: %@",theLines);
         NSMutableArray *mediaItems = [[NSMutableArray alloc] init];
         for (i=0; i<[theLines count]; ++i)
         {
@@ -354,7 +359,7 @@ dispatch_queue_t myQueue;
         
         return returnArray;
     } else {
-        [self showAlert:@"getShares: Could not extract lines from response."];
+        //[self showAlert:@"getShares: Could not extract lines from response."];
         return nil;
     }
 	
@@ -382,9 +387,23 @@ dispatch_queue_t myQueue;
 		
         return returnArray;
     } else {
-        [self showAlert:@"getSharesOfType: Could not extract lines from response."];
+        //[self showAlert:@"getSharesOfType: Could not extract lines from response."];
         return nil;
     }
+}
+
+-(BOOL)isInArray:(NSString*) value array:(NSArray*)array
+{
+    int i=0;
+    for(i=0; i<[array count]; ++i)
+    {
+        NSString* arrayItem = [array objectAtIndex:i];
+        if ([value caseInsensitiveCompare: arrayItem] == NSOrderedSame)
+        {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 -(NSArray *)getDirectory:(NSString *)dir {
@@ -401,6 +420,12 @@ dispatch_queue_t myQueue;
             }
             //NSLog(@"Items: %@",items);
             NSMutableArray *mediaItem = [[NSMutableArray alloc] initWithCapacity:2];
+            
+            NSArray *supportedExt = [NSArray arrayWithObjects:@"avi",@"mpeg",@"wmv",@"asf",
+                                     @"flv",@"mkv",@"mov",@"mp4",@"m4a",@"aac",
+                                     @"nut",@"ogg",@"ogm",@"rm",@"ram",@"rv",@"ra",
+                                     @"rmvb",@"3gp",@"vivo",@"pva",@"nuv",@"nsv",
+                                     @"nsa",@"fli",@"flc",@"iso",@"dvr-ms",@"mpg", nil];
 			
             if ([[items objectAtIndex:[items count]-1] isEqualToString:@""]) {
                 //NSLog(@"This is a folder!");
@@ -409,12 +434,17 @@ dispatch_queue_t myQueue;
                 [mediaItem addObject:@"tFolder"];
             } else {
                 //NSLog(@"This is a file!");
-                [mediaItem addObject:[theLines objectAtIndex:i]];
-                [mediaItem addObject:[items objectAtIndex:[items count]-1]];
-                [mediaItem addObject:@"tFile"];
+                NSString *ext = [[[items objectAtIndex:[items count]-1] componentsSeparatedByString:@"."] objectAtIndex:1];
+                if ([self isInArray:ext array:supportedExt]) {
+                    [mediaItem addObject:[theLines objectAtIndex:i]];
+                    [mediaItem addObject:[items objectAtIndex:[items count]-1]];
+                    [mediaItem addObject:@"tFile"];
+                }
             }
-			
-            [mediaItems addObject:mediaItem];
+			if ([mediaItem count] > 2) {
+                [mediaItems addObject:mediaItem];
+                //NSLog(@"Added media item.");
+            }
             //NSLog(@"Releasing mediaitem");
             [mediaItem release];
         }
@@ -427,7 +457,7 @@ dispatch_queue_t myQueue;
 		
         return returnArray;
     } else {
-        [self showAlert:@"getDirectory: Unable to read lines from response."];
+        [self showAlert:@"Directory offline."];
         return nil;
     }
 }
@@ -702,10 +732,10 @@ dispatch_queue_t myQueue;
     // Note: uncomment this to see the text
 	//NSLog(@"getLines:  %@", text);
     if (text != nil) {
-        //if ([text rangeOfString:@"Error"].location != NSNotFound) {
-        //    [self showAlert:text];
-        //    return 0;
-        //}
+        if ([text rangeOfString:@"Error"].location != NSNotFound) {
+            //[self showAlert:text];
+            return 0;
+        }
 		int p, p1;
 		NSString* tmp;
 		p = (int)[text rangeOfString:@"<li>"].location;

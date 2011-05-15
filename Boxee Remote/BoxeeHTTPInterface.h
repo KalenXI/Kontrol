@@ -24,7 +24,6 @@
     NSString *serverIP;
     NSString *serverPort;
 	NSString *serverPassword;
-    BOOL isBoxeeBox;
     AsyncUdpSocket *pingSocket;
     AsyncUdpSocket *pingrecvSocket;
     AsyncUdpSocket *socket;
@@ -45,15 +44,15 @@ extern NSString * const PingReceivedNotification;
 @property (nonatomic, retain) NSString *serverIP;
 @property (nonatomic, retain) NSString *serverPort;
 @property (nonatomic, retain) NSString *serverPassword;
-@property (nonatomic) BOOL isBoxeeBox;
 @property (nonatomic) BOOL isConnected;
 
 -(id)init;
-- (void) showAlert:(NSString *)text;
+-(void) showAlert:(NSString *)text;
 -(void)discoverBoxeeServers;
 -(void)lostServerConnection;
 -(BoxeeServer *)initServerWithIP:(NSString *)ip port:(NSString *)port name:(NSString *)name httpAuthRequired:(BOOL)httpAuthRequired;
 -(void)addServer:(BoxeeServer *)server toList:(NSMutableArray *)array;
+-(BOOL)isBoxeeBox;
 -(NSArray*)getMusicExtensions;
 -(NSArray*)getPictureExtensions;
 -(NSArray*)getVideoExtensions;
