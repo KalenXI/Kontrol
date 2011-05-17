@@ -11,7 +11,7 @@
 #import "DetailViewController.h"
 #import "RootViewController.h"
 
-@interface AlbumTableView : UITableViewController {
+@interface AlbumTableView : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate> {
     BoxeeHTTPInterface *m_boxee;
     NSArray *mediaShares;
     NSArray *dataSource;
@@ -22,7 +22,16 @@
     BOOL isLibraryDirectory;
     int libraryType;
     dispatch_queue_t myQueue;
+    
+    NSMutableArray *tableData;
+	NSMutableArray *tableSearch;
+    
+    UISearchBar *searchBar;
+	UISearchDisplayController *searchDC;
 }
+
+@property (nonatomic,retain) UISearchBar *searchBar;
+@property (nonatomic,retain) UISearchDisplayController *searchDC;
 
 - (id)initWithAlbum:(NSString *)album Name:(NSString *)name;
 

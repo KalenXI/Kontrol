@@ -11,6 +11,8 @@
 
 @implementation ArtistTableView
 
+@synthesize searchDC,searchBar;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -30,6 +32,8 @@
         dataSource = [[m_boxee getSongsForArtist:artist] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortByTitle]];
         [sortByTitle release];
         [dataSource retain];
+        tableData = [NSMutableArray arrayWithArray:dataSource];
+        [tableData retain];
         isRootDirectory = NO;
         isLibraryDirectory = YES;
         libraryType = 8;
@@ -62,6 +66,19 @@
     self.clearsSelectionOnViewWillAppear = NO;
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     self.title = viewTitle;
+    
+    self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)] autorelease];
+	self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+	self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	self.searchBar.keyboardType = UIKeyboardTypeAlphabet;
+	self.searchBar.delegate = self;
+	self.tableView.tableHeaderView = self.searchBar;
+	
+	// Create the search display controller
+	self.searchDC = [[[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self] autorelease];
+	self.searchDC.searchResultsDataSource = self;
+	self.searchDC.searchResultsDelegate = self;
+	self.searchDC.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -97,6 +114,42 @@
 	return YES;
 }
 
+#pragma mark - Search delegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)sb {
+	[tableData removeAllObjects];
+	
+	for (NSDictionary* item in dataSource) {
+		NSString *title;
+		title = [item valueForKey:@"strTitle"];
+		
+		if ([title rangeOfString:sb.text options:NSAnchoredSearch].location != NSNotFound) {
+			//NSLog(@"Found title: %@",title);
+			[tableData addObject:item];
+		}
+	}
+	[tableData retain];
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
+	tableData = [NSMutableArray arrayWithArray:dataSource];
+	[tableData retain];
+}
+
+- (void)searchBar:(UISearchBar *)sb textDidChange:(NSString *)searchText {
+	[tableData removeAllObjects];
+	
+	for (NSDictionary* item in dataSource) {
+		NSString *title;
+		title = [item valueForKey:@"strTitle"];
+		
+		if ([title rangeOfString:sb.text options:(NSAnchoredSearch | NSCaseInsensitiveSearch)].location != NSNotFound) {
+			[tableData addObject:item];
+		}
+	}
+	[tableData retain];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -108,7 +161,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return numOfShares;
+    return [tableData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,8 +173,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
-	cell.detailTextLabel.text = [m_boxee getArtistWithID:[[dataSource objectAtIndex:indexPath.row] valueForKey:@"idArtist"]];
+    cell.textLabel.text = [[tableData objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
+	cell.detailTextLabel.text = [m_boxee getArtistWithID:[[tableData objectAtIndex:indexPath.row] valueForKey:@"idArtist"]];
     
     return cell;
 }
@@ -171,7 +224,7 @@
 {
     //NSLog(@"Clicked on artist song.");
 	RootViewController* firstLevelViewController = [self.navigationController.viewControllers objectAtIndex:0];
-	NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
+	NSDictionary *currentObject = [tableData objectAtIndex:indexPath.row];
 	
 	MediaItem *media = [[MediaItem alloc] init];
 	

@@ -11,10 +11,12 @@
 #import "DetailViewController.h"
 #import "RootViewController.h"
 
-@interface MoviesTableView : UITableViewController {
+@interface MoviesTableView : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate> {
 	BoxeeHTTPInterface *m_boxee;
     NSArray *mediaShares;
     NSArray *dataSource;
+    NSMutableArray *tableData;
+	NSMutableArray *tableSearch;
     NSString *viewTitle;
     NSString *curShowName;
     int numOfShares;
@@ -22,7 +24,13 @@
     BOOL isLibraryDirectory;
     int libraryType;
     dispatch_queue_t myQueue;
+    
+    UISearchBar *searchBar;
+	UISearchDisplayController *searchDC;
 }
+
+@property (nonatomic,retain) UISearchBar *searchBar;
+@property (nonatomic,retain) UISearchDisplayController *searchDC;
 
 -(id)initWithMovies;
 
