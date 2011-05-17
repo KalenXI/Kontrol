@@ -11,7 +11,7 @@
 #import "SettingsViewControllerPhone.h"
 #import "DetailViewPhone.h"
 
-@interface AlbumTableView_Phone : UITableViewController {
+@interface AlbumTableView_Phone : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate> {
     BoxeeHTTPInterface *m_boxee;
     NSArray *mediaShares;
     NSArray *dataSource;
@@ -21,7 +21,16 @@
     BOOL isRootDirectory;
     BOOL isLibraryDirectory;
     int libraryType;
+    
+    NSMutableArray *tableData;
+	NSMutableArray *tableSearch;
+    
+    UISearchBar *searchBar;
+	UISearchDisplayController *searchDC;
 }
+
+@property (nonatomic,retain) UISearchBar *searchBar;
+@property (nonatomic,retain) UISearchDisplayController *searchDC;
 
 -(id)initWithAlbum:(NSString *)album Name:(NSString *)name;
 

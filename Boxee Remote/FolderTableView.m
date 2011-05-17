@@ -116,11 +116,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)sb {
 	[tableData removeAllObjects];
 	
-	for (NSDictionary* item in dataSource) {
+	for (NSArray* item in dataSource) {
 		NSString *title;
-		title = [item valueForKey:@"strTitle"];
+		title = [item objectAtIndex:1];
 		
-		if ([title rangeOfString:sb.text options:NSAnchoredSearch].location != NSNotFound) {
+		if ([title rangeOfString:sb.text options:NSCaseInsensitiveSearch].location != NSNotFound) {
 			//NSLog(@"Found title: %@",title);
 			[tableData addObject:item];
 		}
@@ -140,7 +140,7 @@
 		NSString *title;
 		title = [item objectAtIndex:1];
 		
-		if ([title rangeOfString:sb.text options:(NSAnchoredSearch | NSCaseInsensitiveSearch)].location != NSNotFound) {
+		if ([title rangeOfString:sb.text options:NSCaseInsensitiveSearch].location != NSNotFound) {
 			[tableData addObject:item];
 		}
 	}

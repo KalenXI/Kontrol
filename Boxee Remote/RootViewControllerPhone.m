@@ -44,7 +44,7 @@ dispatch_queue_t myQueue;
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(RootViewControllerPhone *)viewController animated:(BOOL)animated {
     //NSLog(@"Title: %@",viewController.title);
-    if ([viewController.title isEqualToString:@"Media Library"]) {
+    /*if ([viewController.title isEqualToString:@"Media Library"]) {
         viewController.isRootDirectory = YES;
         if ([m_boxee isDatabaseEnabled]) {
             //NSLog(@"Checkpoint 1");
@@ -69,7 +69,7 @@ dispatch_queue_t myQueue;
         viewController.isRootDirectory = NO;
         viewController.isLibraryDirectory = YES;
         viewController.libraryType = 6;
-    }
+    }*/
     //NSLog(@"LibraryType: %i",libraryType);
 }
 

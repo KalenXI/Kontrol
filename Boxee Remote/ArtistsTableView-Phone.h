@@ -12,7 +12,7 @@
 #import "DetailViewPhone.h"
 #import "ArtistTableView-Phone.h"
 
-@interface ArtistsTableView_Phone : UITableViewController {
+@interface ArtistsTableView_Phone : UITableViewController <UISearchBarDelegate,UISearchDisplayDelegate> {
     BoxeeHTTPInterface *m_boxee;
     NSArray *mediaShares;
     NSArray *dataSource;
@@ -22,7 +22,16 @@
     BOOL isRootDirectory;
     BOOL isLibraryDirectory;
     int libraryType;
+    
+    NSMutableArray *tableData;
+	NSMutableArray *tableSearch;
+    
+    UISearchBar *searchBar;
+	UISearchDisplayController *searchDC;
 }
+
+@property (nonatomic,retain) UISearchBar *searchBar;
+@property (nonatomic,retain) UISearchDisplayController *searchDC;
 
 -(id)initWithArtists;
 

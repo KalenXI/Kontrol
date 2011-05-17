@@ -11,6 +11,8 @@
 
 @implementation AlbumTableView_Phone
 
+@synthesize searchDC,searchBar;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -30,6 +32,8 @@
         dataSource = [[m_boxee getSongsForAlbum:album] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortByTitle]];
         [sortByTitle release];
         [dataSource retain];
+        tableData = [NSMutableArray arrayWithArray:dataSource];
+        [tableData retain];
         isRootDirectory = NO;
         isLibraryDirectory = YES;
         libraryType = 7;
@@ -56,12 +60,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = viewTitle;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)] autorelease];
+	self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+	self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	self.searchBar.keyboardType = UIKeyboardTypeAlphabet;
+	self.searchBar.delegate = self;
+	self.tableView.tableHeaderView = self.searchBar;
+	
+	// Create the search display controller
+	self.searchDC = [[[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self] autorelease];
+	self.searchDC.searchResultsDataSource = self;
+	self.searchDC.searchResultsDelegate = self;
+	self.searchDC.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -97,6 +116,42 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Search delegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)sb {
+	[tableData removeAllObjects];
+	
+	for (NSDictionary* item in dataSource) {
+		NSString *title;
+		title = [item valueForKey:@"strTitle"];
+		
+		if ([title rangeOfString:sb.text options:NSCaseInsensitiveSearch].location != NSNotFound) {
+			//NSLog(@"Found title: %@",title);
+			[tableData addObject:item];
+		}
+	}
+	[tableData retain];
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller {
+	tableData = [NSMutableArray arrayWithArray:dataSource];
+	[tableData retain];
+}
+
+- (void)searchBar:(UISearchBar *)sb textDidChange:(NSString *)searchText {
+	[tableData removeAllObjects];
+	
+	for (NSDictionary* item in dataSource) {
+		NSString *title;
+		title = [item valueForKey:@"strTitle"];
+		
+		if ([title rangeOfString:sb.text options:NSCaseInsensitiveSearch].location != NSNotFound) {
+			[tableData addObject:item];
+		}
+	}
+	[tableData retain];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -108,7 +163,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return numOfShares;
+    return [tableData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,9 +175,9 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    cell.textLabel.text = [[dataSource objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
+    cell.textLabel.text = [[tableData objectAtIndex:indexPath.row] valueForKey:@"strTitle"];
 	//NSLog(@"AlbumSongCell = %@",[dataSource objectAtIndex:indexPath.row]);
-	cell.detailTextLabel.text = [m_boxee getArtistWithID:[[dataSource objectAtIndex:indexPath.row] valueForKey:@"idArtist"]];
+	cell.detailTextLabel.text = [m_boxee getArtistWithID:[[tableData objectAtIndex:indexPath.row] valueForKey:@"idArtist"]];
     
     return cell;
 }
@@ -171,7 +226,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSLog(@"Clicked on album song.");
-	NSDictionary *currentObject = [dataSource objectAtIndex:indexPath.row];
+	NSDictionary *currentObject = [tableData objectAtIndex:indexPath.row];
 	DetailViewPhone *targetViewController = [[DetailViewPhone alloc] init];
 	
 	MediaItem *media = [[MediaItem alloc] init];

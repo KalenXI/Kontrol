@@ -124,7 +124,7 @@
 		NSString *title;
 		title = [item valueForKey:@"strTitle"];
 		
-		if ([title rangeOfString:sb.text options:NSAnchoredSearch].location != NSNotFound) {
+		if ([title rangeOfString:sb.text options:NSCaseInsensitiveSearch].location != NSNotFound) {
 			//NSLog(@"Found title: %@",title);
 			[tableData addObject:item];
 		}
@@ -144,7 +144,7 @@
 		NSString *title;
 		title = [item valueForKey:@"strTitle"];
 		
-		if ([title rangeOfString:sb.text options:(NSAnchoredSearch | NSCaseInsensitiveSearch)].location != NSNotFound) {
+		if ([title rangeOfString:sb.text options:NSCaseInsensitiveSearch].location != NSNotFound) {
 			[tableData addObject:item];
 		}
 	}
