@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BoxeeHTTPInterface.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface RemoteViewController : UIViewController {
@@ -24,7 +25,9 @@
     UIButton *subtitleDelayDec;
     NSTimer *timer;
     NSTimer *holdTimer;
+    AVAudioPlayer *audioPlayer;
 }
+@property (nonatomic, retain) AVAudioPlayer *audioPlayer;
 
 //View controls
 - (void)setViewTo:(int)viewNum;

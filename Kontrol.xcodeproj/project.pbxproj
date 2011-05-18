@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0914AA071343A0E200EA7994 /* nowPlayingBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 0914AA061343A0E100EA7994 /* nowPlayingBG.png */; };
 		0914AA0A1343A35C00EA7994 /* nowPlayingBG_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0914AA091343A35C00EA7994 /* nowPlayingBG_shadow.png */; };
+		0925D6DE1382E8B000DD6946 /* CustomServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0925D6DC1382E8B000DD6946 /* CustomServerController.m */; };
+		0925D6DF1382E8B000DD6946 /* CustomServerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0925D6DD1382E8B000DD6946 /* CustomServerController.xib */; };
 		093CCACF137253FA0095FA1A /* TVShowsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCACE137253FA0095FA1A /* TVShowsTableView.m */; };
 		093CCAD213725CDA0095FA1A /* TVShowTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCAD113725CDA0095FA1A /* TVShowTableView.m */; };
 		093CCAD5137262CD0095FA1A /* RSSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCAD4137262CD0095FA1A /* RSSTableView.m */; };
@@ -89,6 +91,10 @@
 		09A7A7F61379997900418DC6 /* ArtistTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7F51379997900418DC6 /* ArtistTableView-Phone.m */; };
 		09A7A7F913799AE700418DC6 /* FilesTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7F813799AE600418DC6 /* FilesTableView-Phone.m */; };
 		09A7A7FC13799C8E00418DC6 /* FolderTableView-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A7A7FB13799C8D00418DC6 /* FolderTableView-Phone.m */; };
+		09A952551383431B005B941C /* CustomServerController-Phone.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A952531383431B005B941C /* CustomServerController-Phone.m */; };
+		09A952561383431B005B941C /* CustomServerController-Phone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A952541383431B005B941C /* CustomServerController-Phone.xib */; };
+		09A9525A13836F52005B941C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A9525913836F52005B941C /* AVFoundation.framework */; };
+		09B0F8241383FA5900B9F214 /* click2.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 09B0F8231383FA5900B9F214 /* click2.aiff */; };
 		09C956CA133EF5E3006729AE /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C956C9133EF5E3006729AE /* AsyncUdpSocket.m */; };
 		09C956CC133EF71C006729AE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C956CB133EF71C006729AE /* CFNetwork.framework */; };
 		09C956CF133EFD43006729AE /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C956CE133EFD42006729AE /* NSString+MD5.m */; };
@@ -130,6 +136,9 @@
 /* Begin PBXFileReference section */
 		0914AA061343A0E100EA7994 /* nowPlayingBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nowPlayingBG.png; sourceTree = "<group>"; };
 		0914AA091343A35C00EA7994 /* nowPlayingBG_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nowPlayingBG_shadow.png; sourceTree = "<group>"; };
+		0925D6DB1382E8B000DD6946 /* CustomServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomServerController.h; sourceTree = "<group>"; };
+		0925D6DC1382E8B000DD6946 /* CustomServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomServerController.m; sourceTree = "<group>"; };
+		0925D6DD1382E8B000DD6946 /* CustomServerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomServerController.xib; sourceTree = "<group>"; };
 		093CCACD137253FA0095FA1A /* TVShowsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowsTableView.h; sourceTree = "<group>"; };
 		093CCACE137253FA0095FA1A /* TVShowsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShowsTableView.m; sourceTree = "<group>"; };
 		093CCAD013725CDA0095FA1A /* TVShowTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShowTableView.h; sourceTree = "<group>"; };
@@ -249,6 +258,11 @@
 		09A7A7F813799AE600418DC6 /* FilesTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FilesTableView-Phone.m"; sourceTree = "<group>"; };
 		09A7A7FA13799C8B00418DC6 /* FolderTableView-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FolderTableView-Phone.h"; sourceTree = "<group>"; };
 		09A7A7FB13799C8D00418DC6 /* FolderTableView-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FolderTableView-Phone.m"; sourceTree = "<group>"; };
+		09A952521383431B005B941C /* CustomServerController-Phone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CustomServerController-Phone.h"; sourceTree = "<group>"; };
+		09A952531383431B005B941C /* CustomServerController-Phone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CustomServerController-Phone.m"; sourceTree = "<group>"; };
+		09A952541383431B005B941C /* CustomServerController-Phone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CustomServerController-Phone.xib"; sourceTree = "<group>"; };
+		09A9525913836F52005B941C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		09B0F8231383FA5900B9F214 /* click2.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = click2.aiff; sourceTree = "<group>"; };
 		09C956C8133EF5E3006729AE /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		09C956C9133EF5E3006729AE /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		09C956CB133EF71C006729AE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -288,6 +302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A9525A13836F52005B941C /* AVFoundation.framework in Frameworks */,
 				09C956CC133EF71C006729AE /* CFNetwork.framework in Frameworks */,
 				095A2953133D510000F4FC9A /* UIKit.framework in Frameworks */,
 				095A2955133D510000F4FC9A /* Foundation.framework in Frameworks */,
@@ -359,6 +374,7 @@
 		095A2951133D510000F4FC9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09A9525913836F52005B941C /* AVFoundation.framework */,
 				09C956CB133EF71C006729AE /* CFNetwork.framework */,
 				095A2952133D510000F4FC9A /* UIKit.framework */,
 				095A2954133D510000F4FC9A /* Foundation.framework */,
@@ -418,6 +434,7 @@
 				095A296A133D510000F4FC9A /* DetailView.xib */,
 				095A2990133D66E800F4FC9A /* RemoteViewController.xib */,
 				095A29AD133D89B300F4FC9A /* Images */,
+				0925D6DD1382E8B000DD6946 /* CustomServerController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -480,6 +497,7 @@
 				0981EB9A136359D900BF2510 /* RemoteViewControllerPhone.xib */,
 				0981EB861363552200BF2510 /* SettingsViewControllerPhone.xib */,
 				0981EB7013634EAF00BF2510 /* MainWindow-Phone.xib */,
+				09A952541383431B005B941C /* CustomServerController-Phone.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -500,6 +518,8 @@
 				095A299F133D6F3F00F4FC9A /* SettingsViewController.m */,
 				095A29E2133DE4ED00F4FC9A /* SplashScreenViewController.h */,
 				095A29E3133DE4EF00F4FC9A /* SplashScreenViewController.m */,
+				0925D6DB1382E8B000DD6946 /* CustomServerController.h */,
+				0925D6DC1382E8B000DD6946 /* CustomServerController.m */,
 				095A29AC133D89A700F4FC9A /* Resources */,
 			);
 			name = iPad;
@@ -511,6 +531,8 @@
 				09A7A7DE13797B4300418DC6 /* Table View Controllers */,
 				0981EB7B1363507E00BF2510 /* Resources */,
 				0981EB7213634FA400BF2510 /* Boxee_RemoteAppDelegate-Phone.h */,
+				09A952521383431B005B941C /* CustomServerController-Phone.h */,
+				09A952531383431B005B941C /* CustomServerController-Phone.m */,
 				0981EB7313634FA400BF2510 /* Boxee_RemoteAppDelegate-Phone.m */,
 				0981EB841363552200BF2510 /* SettingsViewControllerPhone.h */,
 				0981EB851363552200BF2510 /* SettingsViewControllerPhone.m */,
@@ -529,6 +551,7 @@
 		0981EB811363510900BF2510 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				09B0F8231383FA5900B9F214 /* click2.aiff */,
 				0983DB8413636C660090D189 /* remoteimg */,
 				0983DB821363696E0090D189 /* remotecontroller.png */,
 				09E8CE71135B7EBA00644DE1 /* AsyncSocket.h */,
@@ -720,6 +743,9 @@
 				097D67981363E0E3008E8584 /* Default@2x.png in Resources */,
 				097D679A1363E0EF008E8584 /* Default.png in Resources */,
 				09496AF9136A6368007D5053 /* library.png in Resources */,
+				0925D6DF1382E8B000DD6946 /* CustomServerController.xib in Resources */,
+				09A952561383431B005B941C /* CustomServerController-Phone.xib in Resources */,
+				09B0F8241383FA5900B9F214 /* click2.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +824,8 @@
 				09A7A7F61379997900418DC6 /* ArtistTableView-Phone.m in Sources */,
 				09A7A7F913799AE700418DC6 /* FilesTableView-Phone.m in Sources */,
 				09A7A7FC13799C8E00418DC6 /* FolderTableView-Phone.m in Sources */,
+				0925D6DE1382E8B000DD6946 /* CustomServerController.m in Sources */,
+				09A952551383431B005B941C /* CustomServerController-Phone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,6 +936,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Boxee Remote/Kontrol-Prefix.pch";
 				INFOPLIST_FILE = "Boxee Remote/Kontrol-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				PRODUCT_NAME = Kontrol;
 				STRIP_STYLE = debugging;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -924,6 +953,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Boxee Remote/Kontrol-Prefix.pch";
 				INFOPLIST_FILE = "Boxee Remote/Kontrol-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				PRODUCT_NAME = Kontrol;
 				STRIP_STYLE = debugging;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1013,6 +1043,7 @@
 				GCC_PREFIX_HEADER = "Boxee Remote/Kontrol-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "Boxee Remote/Kontrol-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				PRODUCT_NAME = Kontrol;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BFCA604E-2B35-4DDF-B3B8-111399E19D30";
 				STRIP_STYLE = debugging;

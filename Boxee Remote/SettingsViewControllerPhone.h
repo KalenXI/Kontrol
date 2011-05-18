@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BoxeeHTTPInterface.h"
+#import "CustomServerController-Phone.h"
 
 
-@interface SettingsViewControllerPhone : UIViewController <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate> {
+@interface SettingsViewControllerPhone : UIViewController <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate, CustomServerControllerDelegate_Phone> {
     BoxeeHTTPInterface *m_boxee;
     BOOL searching;
     IBOutlet UITableView *serverListView;

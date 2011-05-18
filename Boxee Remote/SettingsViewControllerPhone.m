@@ -39,14 +39,14 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     if (searching == NO) {
-    //NSLog(@"ViewDidLoad with status %i",searching);
+        //NSLog(@"ViewDidLoad with status %i",searching);
     }
 }
 
@@ -107,7 +107,7 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-
+    
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -133,7 +133,7 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([m_boxee.boxeeServerList count] > 0) {
-        return [m_boxee.boxeeServerList count];
+        return [m_boxee.boxeeServerList count] + 1;
     } else {
         return 1;
     }
@@ -146,11 +146,10 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (searching == YES) {
-        NSString *footer = @"";
+        NSString *footer = @"Searching for servers...";
         return footer;
     } else {
-        NSString *footer = @"";
-        return footer;
+        return nil;
     }
 }
 
@@ -163,10 +162,11 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    //Configure the cell.
-    //BoxeeServer *server = [m_boxee.boxeeServerList objectAtIndex:indexPath.row];
-    //cell.textLabel.text = server.hostName;
-    //cell.textLabel.text = @"Placeholder.";
+    if (indexPath.row == [m_boxee.boxeeServerList count]) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = @"Other";
+        return cell;
+    }
     
     if ([m_boxee.boxeeServerList count] > 0) {
         BoxeeServer *server = [m_boxee.boxeeServerList objectAtIndex:indexPath.row];
@@ -198,43 +198,43 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }   
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }   
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if ((alertView == passwordAlert) && (buttonIndex == 1)) {
@@ -255,51 +255,116 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath	animated:YES];
-    BoxeeServer *server = [m_boxee.boxeeServerList objectAtIndex:indexPath.row];
-    m_boxee.serverIP = server.hostIP;
-    m_boxee.serverPort = server.hostPort;
+-(void) doneButtonPressed:(NSArray *) values {
+    [self dismissModalViewControllerAnimated:YES];
+    NSLog(@"Stuff: %@",values);
+    
+    if ([values count] == 0) {
+        return;
+    }
+    
+    m_boxee.serverIP = [values objectAtIndex:0];
+    m_boxee.serverPort = [values objectAtIndex:1];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-    [defaults setValue:server.hostIP forKey:@"lastServerIP"];
-    [defaults setValue:server.hostPort forKey:@"lastServerPort"];
+    
+    [defaults setValue:[values objectAtIndex:0] forKey:@"lastServerIP"];
+    [defaults setValue:[values objectAtIndex:1] forKey:@"lastServerPort"];
     //NSLog(@"lastServerIP: %@",[defaults stringForKey:@"lastServerIP"]);
-	//NSLog(@"lastServerPort: %@",[defaults stringForKey:@"lastServerPort"]);
+    //NSLog(@"lastServerPort: %@",[defaults stringForKey:@"lastServerPort"]);
     [serverListView reloadData];
-	if ([m_boxee isPasswordProtected]) {
-		// Ask for Username and password.
-		passwordAlert = [[UIAlertView alloc] initWithTitle:@"Boxee Authentication" message:@"\n \n \n \n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-		
-		UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.0, 40.0, 260.0, 50.0)];
-		messageLabel.text = @"This server requires authentication.";
-		messageLabel.lineBreakMode = UILineBreakModeWordWrap;
-		messageLabel.numberOfLines = 0;
-		messageLabel.textAlignment = UITextAlignmentCenter;
-		messageLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-		messageLabel.textColor = [UIColor colorWithWhite:100 alpha:1];
-		[passwordAlert addSubview:messageLabel];
-		
-		// Adds a password Field
-		passwordField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 100.0, 260.0, 25.0)]; passwordField.placeholder = @"Password";
-		[passwordField setSecureTextEntry:YES];
-		[passwordField setBackgroundColor:[UIColor whiteColor]]; [passwordAlert addSubview:passwordField];
-		
-		
-		// Show alert on screen.
-		[passwordAlert show];
-		[passwordField becomeFirstResponder];
-		[passwordAlert release];
-		
-		[messageLabel release];
-		[passwordField release];
-	} else {
-		m_boxee.isConnected = YES;
-		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-		[nc postNotificationName:MediaListNeedsReloadingNotificationPhone object:self];
-	}
+    if ([m_boxee isPasswordProtected]) {
+        passwordAlert = [[UIAlertView alloc] initWithTitle:@"Boxee Authentication" message:@"\n \n \n \n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.0, 40.0, 260.0, 50.0)];
+        messageLabel.text = @"This server requires authentication.";
+        messageLabel.lineBreakMode = UILineBreakModeWordWrap;
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = UITextAlignmentCenter;
+        messageLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+        messageLabel.textColor = [UIColor colorWithWhite:100 alpha:1];
+        [passwordAlert addSubview:messageLabel];
+        
+        // Adds a password Field
+        passwordField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 100.0, 260.0, 25.0)]; passwordField.placeholder = @"Password";
+        [passwordField setSecureTextEntry:YES];
+        [passwordField setBackgroundColor:[UIColor whiteColor]]; [passwordAlert addSubview:passwordField];
+        
+        
+        // Show alert on screen.
+        [passwordAlert show];
+        [passwordField becomeFirstResponder];
+        [passwordAlert release];
+        
+        [messageLabel release];
+        [passwordField release];
+    } else {
+        m_boxee.isConnected = YES;
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:MediaListNeedsReloadingNotificationPhone object:self];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == [m_boxee.boxeeServerList count]) {
+        CustomServerController_Phone *cust = [[CustomServerController_Phone alloc] initWithStyle:UITableViewStyleGrouped];
+        cust.delegate = self;
+        
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:cust];
+        
+        nc.modalPresentationStyle = UIModalPresentationFormSheet;
+        
+        [self presentModalViewController:nc animated:YES];
+        
+        [nc release];
+        [cust release];
+    } else {
+        
+        [tableView deselectRowAtIndexPath:indexPath	animated:YES];
+        BoxeeServer *server = [m_boxee.boxeeServerList objectAtIndex:indexPath.row];
+        m_boxee.serverIP = server.hostIP;
+        m_boxee.serverPort = server.hostPort;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        [defaults setValue:server.hostIP forKey:@"lastServerIP"];
+        [defaults setValue:server.hostPort forKey:@"lastServerPort"];
+        //NSLog(@"lastServerIP: %@",[defaults stringForKey:@"lastServerIP"]);
+        //NSLog(@"lastServerPort: %@",[defaults stringForKey:@"lastServerPort"]);
+        [serverListView reloadData];
+        if ([m_boxee isPasswordProtected]) {
+            // Ask for Username and password.
+            passwordAlert = [[UIAlertView alloc] initWithTitle:@"Boxee Authentication" message:@"\n \n \n \n" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+            
+            UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.0, 40.0, 260.0, 50.0)];
+            messageLabel.text = @"This server requires authentication.";
+            messageLabel.lineBreakMode = UILineBreakModeWordWrap;
+            messageLabel.numberOfLines = 0;
+            messageLabel.textAlignment = UITextAlignmentCenter;
+            messageLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+            messageLabel.textColor = [UIColor colorWithWhite:100 alpha:1];
+            [passwordAlert addSubview:messageLabel];
+            
+            // Adds a password Field
+            passwordField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 100.0, 260.0, 25.0)]; passwordField.placeholder = @"Password";
+            [passwordField setSecureTextEntry:YES];
+            [passwordField setBackgroundColor:[UIColor whiteColor]]; [passwordAlert addSubview:passwordField];
+            
+            
+            // Show alert on screen.
+            [passwordAlert show];
+            [passwordField becomeFirstResponder];
+            [passwordAlert release];
+            
+            [messageLabel release];
+            [passwordField release];
+        } else {
+            m_boxee.isConnected = YES;
+            NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+            [nc postNotificationName:MediaListNeedsReloadingNotificationPhone object:self];
+        }
+    }
     //NSLog(@"Sending reload notification.");
 }
 

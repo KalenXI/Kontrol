@@ -11,6 +11,8 @@
 
 @implementation RemoteViewController
 
+@synthesize audioPlayer;
+
 @synthesize muteButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -91,6 +93,14 @@
 
 #pragma mark - Button code
 
+- (void) playClick {
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"click2" withExtension: @"aiff"];
+    if (!url){NSLog(@"file not found"); return;}
+    NSError *error;
+    self.audioPlayer = [[[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error] autorelease];
+    [audioPlayer play];
+}
+
 - (void)buttonTouch:(NSTimer *)sender {
     if ([[sender userInfo] isEqualToString:@"Up"]) {
         [m_boxee sendKey:270];
@@ -117,11 +127,13 @@
 #pragma mark - Remote buttons
 
 - (IBAction)selectButtonClicked:(id)sender {
+    [self playClick];
     [m_boxee sendKey:256];
     //NSLog(@"Clicked select.");
 }
 
 - (IBAction)rightButtonClicked:(id)sender {
+    [self playClick];
     [m_boxee sendKey:273];
     if ([timer isValid]) 
         [timer invalidate];
@@ -133,6 +145,7 @@
 }
 
 - (IBAction)downButtonClicked:(id)sender {
+    [self playClick];
     [m_boxee sendKey:271];
     if ([timer isValid]) 
         [timer invalidate];
@@ -144,6 +157,7 @@
 }
 
 - (IBAction)leftButtonClicked:(id)sender {
+    [self playClick];
     [m_boxee sendKey:272];
     if ([timer isValid]) 
         [timer invalidate];
@@ -155,6 +169,7 @@
 }
 
 - (IBAction)upButtonClicked:(id)sender {
+    [self playClick];
     [m_boxee sendKey:270];
     if ([timer isValid]) 
         [timer invalidate];
@@ -166,6 +181,7 @@
 }
 
 - (IBAction)backButtonClicked:(id)sender {
+    [self playClick];
     [m_boxee sendKey:275];
     //NSLog(@"Clicked back.");
 }

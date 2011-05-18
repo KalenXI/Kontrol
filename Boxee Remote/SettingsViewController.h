@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "BoxeeHTTPInterface.h"
+#import "CustomServerController.h"
 
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIAlertViewDelegate> {
+@interface SettingsViewController : UIViewController <UITableViewDelegate,
+UITableViewDataSource, UINavigationControllerDelegate, UIAlertViewDelegate, CustomServerControllerDelegate> {
+    
     BoxeeHTTPInterface *m_boxee;
     BOOL searching;
-    IBOutlet UITableView *serverListVIew;
+    IBOutlet UITableView *serverListView;
     UIActivityIndicatorView *activityIndicator;
 	UIAlertView *passwordAlert;
 	UITextField *passwordField;

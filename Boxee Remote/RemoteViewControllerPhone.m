@@ -11,6 +11,8 @@
 
 @implementation RemoteViewControllerPhone
 
+@synthesize audioPlayer;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -70,11 +72,20 @@
         [m_boxee sendKey:270];
     } else if ([[sender userInfo] isEqualToString:@"Down"]) {
         [m_boxee sendKey:271];
+        [self playClick];
     } else if ([[sender userInfo] isEqualToString:@"Left"]) {
         [m_boxee sendKey:272];
     } else if ([[sender userInfo] isEqualToString:@"Right"]) {
         [m_boxee sendKey:273];
     }
+}
+
+- (void) playClick {
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"click2" withExtension: @"aiff"];
+    if (!url){NSLog(@"file not found"); return;}
+    NSError *error;
+    self.audioPlayer = [[[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error] autorelease];
+    [audioPlayer play];
 }
 
 - (void)buttonBeginTouch:(NSTimer *)sender {
@@ -91,10 +102,12 @@
 - (IBAction)selectButtonTouched:(id)sender {
     //NSLog(@"Touched select.");
     [m_boxee sendKey:256];
+    [self playClick];
 }
 
 - (IBAction)downButtonTouched:(id)sender {
     [m_boxee sendKey:271];
+    [self playClick];
     if ([timer isValid]) 
         [timer invalidate];
     timer = nil;
@@ -105,6 +118,7 @@
 
 - (IBAction)UpButtonTouched:(id)sender {
     [m_boxee sendKey:270];
+    [self playClick];
     if (timer != nil) 
         [timer invalidate];
     timer = nil;
@@ -115,6 +129,7 @@
 
 - (IBAction)rightButtonTouched:(id)sender {
     [m_boxee sendKey:273];
+    [self playClick];
     if (timer != nil) 
         [timer invalidate];
     timer = nil;
@@ -125,6 +140,7 @@
 
 - (IBAction)leftButtonTouched:(id)sender {
     [m_boxee sendKey:272];
+    [self playClick];
     if (timer != nil) 
         [timer invalidate];
     timer = nil;
@@ -135,6 +151,7 @@
 
 - (IBAction)backButtonTouched:(id)sender {
     [m_boxee sendKey:275];
+    [self playClick];
 }
 
 - (IBAction)downButtonTouchDown:(id)sender {
