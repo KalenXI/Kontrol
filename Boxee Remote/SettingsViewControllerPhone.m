@@ -263,6 +263,10 @@ NSString * const MediaListNeedsReloadingNotificationPhone = @"ReloadMedia";
         return;
     }
     
+    if ([values count] < 2) {
+        return;
+    }
+    
     m_boxee.serverIP = [values objectAtIndex:0];
     m_boxee.serverPort = [values objectAtIndex:1];
     

@@ -71,11 +71,20 @@
 
 -(void) buttonPressed:(id) sender {
     NSMutableArray *values;
-    if (serverPort != nil) {
-        values = [[NSMutableArray alloc] initWithObjects:serverIP,serverPort, nil];
-    } else {
-        values = [[NSMutableArray alloc] initWithObjects:serverIP,@"8080", nil];
+    
+    if (serverIP == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Missing server IP." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
     }
+    
+    if (serverPort == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Missing server port, setting to default (8800)." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        serverPort = @"8800";
+    }
+    
+    values = [[NSMutableArray alloc] initWithObjects:serverIP,serverPort, nil];
     
     NSLog(@"serverIP: %@",serverIP);
     NSLog(@"serverport: %@",serverPort);
