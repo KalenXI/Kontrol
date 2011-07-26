@@ -15,6 +15,7 @@
 		093CCAD213725CDA0095FA1A /* TVShowTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCAD113725CDA0095FA1A /* TVShowTableView.m */; };
 		093CCAD5137262CD0095FA1A /* RSSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CCAD4137262CD0095FA1A /* RSSTableView.m */; };
 		09496AF9136A6368007D5053 /* library.png in Resources */ = {isa = PBXBuildFile; fileRef = 09496AF8136A6368007D5053 /* library.png */; };
+		0957DEAF1391433300E16911 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0957DEAE1391433300E16911 /* GCDAsyncSocket.m */; };
 		095A2953133D510000F4FC9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095A2952133D510000F4FC9A /* UIKit.framework */; };
 		095A2955133D510000F4FC9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095A2954133D510000F4FC9A /* Foundation.framework */; };
 		095A2957133D510000F4FC9A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095A2956133D510000F4FC9A /* CoreGraphics.framework */; };
@@ -95,6 +96,7 @@
 		09A952561383431B005B941C /* CustomServerController-Phone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A952541383431B005B941C /* CustomServerController-Phone.xib */; };
 		09A9525A13836F52005B941C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A9525913836F52005B941C /* AVFoundation.framework */; };
 		09B0F8241383FA5900B9F214 /* click2.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 09B0F8231383FA5900B9F214 /* click2.aiff */; };
+		09C3AD67138CC4030060C9A3 /* JSONInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD66138CC4030060C9A3 /* JSONInterface.m */; };
 		09C956CA133EF5E3006729AE /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C956C9133EF5E3006729AE /* AsyncUdpSocket.m */; };
 		09C956CC133EF71C006729AE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C956CB133EF71C006729AE /* CFNetwork.framework */; };
 		09C956CF133EFD43006729AE /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C956CE133EFD42006729AE /* NSString+MD5.m */; };
@@ -146,6 +148,8 @@
 		093CCAD3137262CD0095FA1A /* RSSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSTableView.h; sourceTree = "<group>"; };
 		093CCAD4137262CD0095FA1A /* RSSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSTableView.m; sourceTree = "<group>"; };
 		09496AF8136A6368007D5053 /* library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library.png; sourceTree = "<group>"; };
+		0957DEAD1391433300E16911 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		0957DEAE1391433300E16911 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		095A294E133D510000F4FC9A /* Kontrol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontrol.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095A2952133D510000F4FC9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		095A2954133D510000F4FC9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -263,6 +267,8 @@
 		09A952541383431B005B941C /* CustomServerController-Phone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CustomServerController-Phone.xib"; sourceTree = "<group>"; };
 		09A9525913836F52005B941C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		09B0F8231383FA5900B9F214 /* click2.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = click2.aiff; sourceTree = "<group>"; };
+		09C3AD65138CC4030060C9A3 /* JSONInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONInterface.h; sourceTree = "<group>"; };
+		09C3AD66138CC4030060C9A3 /* JSONInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONInterface.m; sourceTree = "<group>"; };
 		09C956C8133EF5E3006729AE /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		09C956C9133EF5E3006729AE /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		09C956CB133EF71C006729AE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -551,6 +557,8 @@
 		0981EB811363510900BF2510 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0957DEAD1391433300E16911 /* GCDAsyncSocket.h */,
+				0957DEAE1391433300E16911 /* GCDAsyncSocket.m */,
 				09B0F8231383FA5900B9F214 /* click2.aiff */,
 				0983DB8413636C660090D189 /* remoteimg */,
 				0983DB821363696E0090D189 /* remotecontroller.png */,
@@ -572,6 +580,8 @@
 				0981C83A133E298800F967D2 /* MediaItem.h */,
 				0981C83B133E298800F967D2 /* MediaItem.m */,
 				09C9570A1340EE8C006729AE /* NSData+Base64.h */,
+				09C3AD65138CC4030060C9A3 /* JSONInterface.h */,
+				09C3AD66138CC4030060C9A3 /* JSONInterface.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -826,6 +836,8 @@
 				09A7A7FC13799C8E00418DC6 /* FolderTableView-Phone.m in Sources */,
 				0925D6DE1382E8B000DD6946 /* CustomServerController.m in Sources */,
 				09A952551383431B005B941C /* CustomServerController-Phone.m in Sources */,
+				09C3AD67138CC4030060C9A3 /* JSONInterface.m in Sources */,
+				0957DEAF1391433300E16911 /* GCDAsyncSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

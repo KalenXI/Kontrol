@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MediaItem.h"
 #import "AsyncUdpSocket.h"
+#import "GCDAsyncSocket.h"
 #import "NSString+MD5.h"
 #import "NSData+Base64.h"
 #import "BoxeeServer.h"
@@ -29,6 +30,7 @@
     AsyncUdpSocket *socket;
     AsyncUdpSocket *recvSocket;
     BOOL isConnected;
+    BOOL useJSON;
 
 }
 
@@ -45,6 +47,7 @@ extern NSString * const PingReceivedNotification;
 @property (nonatomic, retain) NSString *serverPort;
 @property (nonatomic, retain) NSString *serverPassword;
 @property (nonatomic) BOOL isConnected;
+@property (nonatomic) BOOL useJSON;
 
 -(id)init;
 -(void) showAlert:(NSString *)text;

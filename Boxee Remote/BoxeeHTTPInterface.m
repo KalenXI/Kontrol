@@ -17,7 +17,7 @@ NSString * const FoundServerNotification = @"FoundServer";
 NSString * const ConnectionLostNotification = @"LostConnection";
 
 @implementation BoxeeHTTPInterface
-@synthesize boxeeServerList,serverIP,serverPort,serverPassword,isConnected;
+@synthesize boxeeServerList,serverIP,serverPort,serverPassword,isConnected,useJSON;
 
 dispatch_queue_t myQueue;
 
