@@ -70,6 +70,19 @@
 }
 
 -(void) buttonPressed:(id) sender {
+    
+    if (serverIP == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Missing server IP." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if (serverPort == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Missing server port, setting to default." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        serverPort = @"8800";
+    }
+    
     NSArray *values = [[NSArray alloc] initWithObjects: serverIP,serverPort,nil];
     
     NSLog(@"serverIP: %@",serverIP);
